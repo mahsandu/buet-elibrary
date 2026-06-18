@@ -1,0 +1,115 @@
+version: "3.8"
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.2
+    container_name: elib_es
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    networks:
+      - elib_network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  mariadb:
+    image: mariadb:10.6
+    container_name: elib_mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - elib_network
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  drupal:
+    image: drupal:11-fpm
+    container_name: elib_drupal
+    restart: unless-stopped
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+    volumes:
+      - drupal_data:/var/www/html
+    networks:
+      - elib_network
+    environment:
+      - DRUPAL_DATABASE_HOST=mariadb
+      - DRUPAL_DATABASE_PORT=3306
+      - DRUPAL_DATABASE_NAME=${MYSQL_DATABASE}
+      - DRUPAL_DATABASE_USER=${MYSQL_USER}
+      - DRUPAL_DATABASE_PASSWORD=${MYSQL_PASSWORD}
+
+  nginx:
+    image: nginx:alpine
+    container_name: elib_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - drupal
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - drupal_data:/var/www/html:ro
+    networks:
+      - elib_network
+      - elib_public
+
+  redis:
+    image: redis:7-alpine
+    container_name: elib_redis
+    restart: unless-stopped
+    networks:
+      - elib_network
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+
+  microservices:
+    build:
+      context: ./microservices
+    container_name: elib_microservices
+    restart: unless-stopped
+    depends_on:
+      - elasticsearch
+      - redis
+    networks:
+      - elib_network
+    environment:
+      - ES_HOST=elasticsearch
+      - ES_PORT=9200
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+volumes:
+  es_data:
+    driver: local
+  drupal_data:
+    driver: local
+  mariadb_data:
+    driver: local
+
+networks:
+  elib_network:
+    driver: bridge
+  elib_public:
+    driver: bridge
