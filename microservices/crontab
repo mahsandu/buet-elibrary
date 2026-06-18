@@ -1,0 +1,3 @@
+0 2 * * * cd /app && /usr/local/bin/python dspace_etl.py >> /tmp/dspace_etl.log 2>&1
+0 3 * * * cd /app && /usr/local/bin/python koha_etl.py >> /tmp/koha_etl.log 2>&1
+0 */6 * * * cd /app && /usr/local/bin/python cache_warm.py >> /tmp/cache_warm.log 2>&1

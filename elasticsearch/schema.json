@@ -1,0 +1,83 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "refresh_interval": "1s",
+    "analysis": {
+      "analyzer": {
+        "english": {
+          "type": "standard",
+          "stopwords": "_english_"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "id": {
+        "type": "keyword"
+      },
+      "source_system": {
+        "type": "keyword"
+      },
+      "title": {
+        "type": "text",
+        "analyzer": "english",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "creator": {
+        "type": "text",
+        "analyzer": "standard",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "isbn": {
+        "type": "keyword"
+      },
+      "publish_date": {
+        "type": "date",
+        "format": "yyyy-MM-dd||yyyy"
+      },
+      "subjects": {
+        "type": "keyword"
+      },
+      "format_type": {
+        "type": "keyword"
+      },
+      "target_uri": {
+        "type": "keyword"
+      },
+      "fingerprint": {
+        "type": "keyword"
+      },
+      "full_text": {
+        "type": "text",
+        "analyzer": "english"
+      },
+      "language": {
+        "type": "keyword"
+      },
+      "publisher": {
+        "type": "text",
+        "analyzer": "standard"
+      },
+      "description": {
+        "type": "text",
+        "analyzer": "english"
+      },
+      "created_at": {
+        "type": "date"
+      },
+      "updated_at": {
+        "type": "date"
+      }
+    }
+  }
+}
