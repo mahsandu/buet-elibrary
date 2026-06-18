@@ -100,6 +100,24 @@ services:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
 
+  # ------------------------------------------------------------------------------
+  # E-Resource Proxy (off-campus database access)
+  # ------------------------------------------------------------------------------
+  proxy:
+    image: nginx:alpine
+    container_name: elib_proxy
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - drupal
+    volumes:
+      - ./proxy/nginx-proxy.conf:/etc/nginx/nginx.conf:ro
+      - ./proxy/.htpasswd:/etc/nginx/.htpasswd:ro
+    networks:
+      - elib_network
+      - elib_public
+
 volumes:
   es_data:
     driver: local
