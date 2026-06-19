@@ -118,6 +118,26 @@ services:
       - elib_network
       - elib_public
 
+  # ------------------------------------------------------------------------------
+  # Federated Search Gateway (queries external databases in parallel)
+  # ------------------------------------------------------------------------------
+  federated:
+    build:
+      context: ./microservices
+    container_name: elib_federated
+    restart: unless-stopped
+    depends_on:
+      - redis
+    networks:
+      - elib_network
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - IEEE_API_KEY=${IEEE_API_KEY:-}
+      - ELSEVIER_API_KEY=${ELSEVIER_API_KEY:-}
+      - CORE_API_KEY=${CORE_API_KEY:-}
+    command: ["python", "federated_search.py"]
+
 volumes:
   es_data:
     driver: local

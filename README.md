@@ -87,6 +87,7 @@ BUET E-Library V4 is a modern, containerized digital library discovery platform 
 | Service | Image | Role | Ports |
 |---|---|---|---|
 | `proxy` | `nginx:alpine` | E-resource proxy for off-campus database access | 8080 |
+| `federated` | Build from `./microservices` | Federated search gateway (external DB APIs) | — (internal) |
 | `nginx` | `nginx:alpine` | Reverse proxy, static file serving, SSL | 80, 443 |
 | `drupal` | `drupal:11-fpm` | Discovery frontend, CMS, search UI | — (internal) |
 | `elasticsearch` | `elasticsearch:8.10.2` | Full-text search index, faceted queries | — (internal) |
@@ -211,6 +212,74 @@ sudo certbot certonly --standalone -d proxy.buet.ac.bd
 | Best For | 6-10 databases | 20+ databases | Enterprise |
 
 **Full documentation:** [`proxy/README.md`](proxy/README.md)
+
+---
+
+## Federated Search (Global Scholarly Content)
+
+The **Federated Search Gateway** queries external scholarly databases in parallel and merges results with the local unified index (Elasticsearch). This provides BUET users with access to global research beyond institutional holdings.
+
+### Architecture
+
+```
+User Query → Drupal → Federated Gateway → Crossref + OpenAlex + CORE + IEEE + Elsevier
+                                      → Results merged and deduplicated by DOI
+                                      → Displayed alongside local Koha/DSpace results
+```
+
+### Supported Sources
+
+| Source | API | Free? | Key Required? |
+|--------|-----|-------|---------------|
+| **Crossref** | `https://api.crossref.org/works` | Yes | No |
+| **OpenAlex** | `https://api.openalex.org/works` | Yes | No |
+| **CORE** | `https://api.core.ac.uk/v3/search/works` | Yes | Free key |
+| **IEEE Xplore** | `https://ieeexplore.ieee.org/gateway/inspec/api` | Limited | Yes |
+| **Elsevier Scopus** | `https://api.elsevier.com/content/search/scopus` | Limited | Yes |
+
+### Quick Start
+
+1. **Enable free sources** (no configuration needed):
+   ```bash
+   # Crossref and OpenAlex are enabled by default
+   curl "http://localhost:5002/api/federated/search?q=machine+learning&limit=5"
+   ```
+
+2. **Add CORE API key** (optional, free):
+   - Register at https://core.ac.uk/services/api
+   - Add to `.env`: `CORE_API_KEY=your-key`
+
+3. **Add IEEE / Elsevier** (optional, requires institutional keys):
+   - IEEE: https://developer.ieee.org/
+   - Elsevier: https://dev.elsevier.com/
+   - Add to `.env`:
+     ```bash
+     IEEE_API_KEY=your-ieee-key
+     ELSEVIER_API_KEY=your-elsevier-key
+     ```
+
+### API Endpoints
+
+```bash
+# Search all enabled sources
+curl "http://localhost:5002/api/federated/search?q=machine+learning&limit=5"
+
+# Search specific sources
+curl "http://localhost:5002/api/federated/search?q=machine+learning&sources=crossref,openalex"
+
+# List available sources
+curl "http://localhost:5002/api/federated/sources"
+```
+
+### Integration with Drupal
+
+The federated search results can be displayed alongside local Elasticsearch results via:
+
+1. **Custom Drupal Controller** — calls the gateway and renders themed output
+2. **JavaScript Meta-Search** — queries APIs directly from the browser (CORS limitations apply)
+3. **React/Vue Component** — decoupled frontend that queries both ES and federated APIs in parallel
+
+**Full documentation:** [`docs/federated_search_guide.md`](docs/federated_search_guide.md)
 
 ---
 
