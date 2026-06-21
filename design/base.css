@@ -1,0 +1,181 @@
+/*
+ * BUET E-Library Design System — CSS Variables
+ * File: design/base.css
+ * Purpose: Design tokens for the Bishwo theme. Import this first.
+ */
+
+:root {
+  /* ── Primary: BUET Maroon ─────────────────────────────────────────── */
+  --maroon-50: #FDF2F2;
+  --maroon-100: #FADCDC;
+  --maroon-200: #F5B5B5;
+  --maroon-300: #E88080;
+  --maroon-400: #D14D4D;
+  --maroon-500: #B52A2A;
+  --maroon-600: #8B0000;
+  --maroon-700: #700000;
+  --maroon-800: #520000;
+  --maroon-900: #330000;
+
+  /* ── Accent: Gold Tassel ────────────────────────────────────────── */
+  --gold-50: #FFFBEB;
+  --gold-100: #FEF3C7;
+  --gold-200: #FDE68A;
+  --gold-300: #FCD34D;
+  --gold-400: #FBBF24;
+  --gold-500: #D4AF37;
+  --gold-600: #B5901F;
+  --gold-700: #8C6D14;
+  --gold-800: #5C4710;
+  --gold-900: #332607;
+
+  /* ── Secondary: Campus Green ──────────────────────────────────── */
+  --green-50: #F0FDF4;
+  --green-100: #DCFCE7;
+  --green-200: #BBF7D0;
+  --green-300: #86EFAC;
+  --green-400: #4ADE80;
+  --green-500: #16A34A;
+  --green-600: #15803D;
+  --green-700: #166534;
+  --green-800: #14532D;
+  --green-900: #052E16;
+
+  /* ── Neutral: Concrete & Paper ─────────────────────────────────── */
+  --white: #FFFFFF;
+  --paper-50: #FDFCFA;
+  --paper-100: #F8F6F3;
+  --paper-200: #F0EDE8;
+  --paper-300: #E3DFD8;
+  --paper-400: #C4BFB5;
+  --paper-500: #9A958C;
+  --paper-600: #6B675F;
+  --paper-700: #4A4742;
+  --paper-800: #2E2C28;
+  --paper-900: #1A1916;
+
+  /* ── Semantic ───────────────────────────────────────────────────── */
+  --info: #2563EB;
+  --warning: #D97706;
+  --danger: #DC2626;
+  --success: #16A34A;
+
+  /* ── Typography ─────────────────────────────────────────────────── */
+  --font-primary: "Noto Serif Bengali", "Noto Serif", "Georgia", serif;
+  --font-secondary: "Inter", "Noto Sans Bengali", "Helvetica Neue", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+
+  --text-hero: 3rem;      /* 48px */
+  --text-h1: 2.25rem;     /* 36px */
+  --text-h2: 1.75rem;     /* 28px */
+  --text-h3: 1.375rem;    /* 22px */
+  --text-h4: 1.125rem;    /* 18px */
+  --text-body-lg: 1.0625rem; /* 17px */
+  --text-body: 0.9375rem; /* 15px */
+  --text-body-sm: 0.8125rem; /* 13px */
+  --text-caption: 0.6875rem; /* 11px */
+  --text-button: 0.875rem; /* 14px */
+
+  /* ── Spacing ────────────────────────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* ── Layout ─────────────────────────────────────────────────────── */
+  --max-width: 1440px;
+  --grid-columns: 12;
+  --grid-gutter: 24px;
+
+  /* ── Shadows ────────────────────────────────────────────────────── */
+  --shadow-sm: 0 1px 2px rgba(26, 25, 22, 0.04);
+  --shadow-md: 0 4px 8px rgba(26, 25, 22, 0.08);
+  --shadow-lg: 0 8px 16px rgba(26, 25, 22, 0.12);
+  --shadow-xl: 0 16px 32px rgba(26, 25, 22, 0.16);
+
+  /* ── Transitions ────────────────────────────────────────────────── */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.2s ease;
+  --transition-slow: 0.3s ease;
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Border Radius ──────────────────────────────────────────────── */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  /* ── Z-Index Scale ─────────────────────────────────────────────── */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 300;
+  --z-tooltip: 400;
+}
+
+/* ── Dark Mode Overrides ──────────────────────────────────────────── */
+
+[data-theme="dark"] {
+  --bg-primary: var(--paper-900);
+  --bg-secondary: var(--paper-800);
+  --bg-tertiary: var(--paper-700);
+  --text-primary: #E8E6E3;
+  --text-secondary: #B5B2AD;
+  --text-muted: #8A857C;
+  --border-color: var(--paper-700);
+  --card-bg: var(--paper-800);
+  --card-border: var(--paper-700);
+  --nav-bg: var(--maroon-800);
+  --nav-border: var(--gold-400);
+  --link-color: var(--maroon-400);
+  --link-hover: var(--maroon-300);
+  --accent: var(--gold-400);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* ── Light Mode Defaults (for explicit [data-theme="light"]) ──────── */
+
+[data-theme="light"] {
+  --bg-primary: var(--white);
+  --bg-secondary: var(--paper-50);
+  --bg-tertiary: var(--paper-100);
+  --text-primary: var(--paper-900);
+  --text-secondary: var(--paper-700);
+  --text-muted: var(--paper-500);
+  --border-color: var(--paper-200);
+  --card-bg: var(--white);
+  --card-border: var(--paper-200);
+  --nav-bg: var(--maroon-700);
+  --nav-border: var(--gold-500);
+  --link-color: var(--maroon-600);
+  --link-hover: var(--maroon-500);
+  --accent: var(--gold-500);
+}
+
+/* Default to light mode when no data-theme is set */
+:root:not([data-theme]) {
+  --bg-primary: var(--white);
+  --bg-secondary: var(--paper-50);
+  --bg-tertiary: var(--paper-100);
+  --text-primary: var(--paper-900);
+  --text-secondary: var(--paper-700);
+  --text-muted: var(--paper-500);
+  --border-color: var(--paper-200);
+  --card-bg: var(--white);
+  --card-border: var(--paper-200);
+  --nav-bg: var(--maroon-700);
+  --nav-border: var(--gold-500);
+  --link-color: var(--maroon-600);
+  --link-hover: var(--maroon-500);
+  --accent: var(--gold-500);
+}

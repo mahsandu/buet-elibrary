@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BUET E-Library — Design Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif:wght@400;600;700&family=Noto+Serif+Bengali:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* Import design tokens */
+    @import url('base.css');
+
+    /* ── Reset & Base ───────────────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: var(--font-secondary);
+      font-size: var(--text-body);
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    a { color: var(--link-color); text-decoration: none; transition: color 0.2s ease; }
+    a:hover { color: var(--link-hover); text-decoration: underline; }
+
+    /* ── Navigation ─────────────────────────────────────────────────── */
+    .main-nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--nav-bg);
+      border-bottom: 3px solid var(--nav-border);
+      padding: 0 var(--space-5);
+    }
+    .nav-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      color: var(--white);
+      font-family: var(--font-primary);
+      font-size: var(--text-h4);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .logo-icon {
+      width: 40px; height: 40px;
+      background: var(--gold-500);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-primary); font-size: 20px; color: var(--maroon-700);
+    }
+    .nav-links { display: flex; gap: var(--space-6); list-style: none; }
+    .nav-link {
+      position: relative;
+      color: rgba(255,255,255,0.85);
+      font-size: var(--text-button); font-weight: 500;
+      padding: 8px 0; text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--white); }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 2px; background: var(--gold-500);
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .theme-toggle {
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.85); font-size: 20px;
+      padding: 8px; border-radius: 50%;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .theme-toggle:hover { background: rgba(255,255,255,0.1); color: var(--white); }
+
+    /* ── Hero Section ───────────────────────────────────────────────── */
+    .hero {
+      background: var(--paper-50);
+      padding: var(--space-10) var(--space-5);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        linear-gradient(var(--paper-200) 1px, transparent 1px),
+        linear-gradient(90deg, var(--paper-200) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+    .hero-title {
+      font-family: var(--font-primary);
+      font-size: var(--text-hero); font-weight: 700;
+      color: var(--maroon-700); line-height: 1.1;
+      margin-bottom: var(--space-2);
+    }
+    .hero-subtitle {
+      font-family: var(--font-primary);
+      font-size: var(--text-h2); font-weight: 400;
+      color: var(--paper-600); margin-bottom: var(--space-2);
+    }
+    .hero-tagline {
+      font-size: var(--text-body-lg); color: var(--paper-500);
+      margin-bottom: var(--space-7);
+    }
+
+    /* ── Search Box ─────────────────────────────────────────────────── */
+    .hero-search {
+      display: flex; max-width: 700px; margin: 0 auto;
+      border: 2px solid var(--paper-300); border-radius: var(--radius-lg);
+      overflow: hidden; background: var(--white);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .hero-search:focus-within {
+      border-color: var(--maroon-500);
+      box-shadow: 0 0 0 4px rgba(139, 0, 0, 0.08);
+    }
+    .hero-search input {
+      flex: 1; padding: 16px 20px; border: none;
+      font-family: var(--font-secondary); font-size: var(--text-body-lg);
+      color: var(--text-primary); background: transparent;
+    }
+    .hero-search input::placeholder { color: var(--paper-400); }
+    .hero-search button {
+      padding: 16px 32px; background: var(--gold-500); color: var(--paper-900);
+      font-weight: 600; font-size: var(--text-button); border: none;
+      cursor: pointer; transition: background 0.2s ease;
+    }
+    .hero-search button:hover { background: var(--gold-600); }
+
+    .search-filters {
+      display: flex; justify-content: center; gap: var(--space-3);
+      margin-top: var(--space-5);
+    }
+    .filter-chip {
+      padding: 8px 16px; border-radius: var(--radius-full);
+      background: var(--white); border: 1px solid var(--paper-200);
+      font-size: var(--text-body-sm); color: var(--paper-700);
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .filter-chip:hover, .filter-chip.active {
+      background: var(--maroon-600); color: var(--white); border-color: var(--maroon-600);
+    }
+
+    /* ── Stats Section ──────────────────────────────────────────────── */
+    .stats { padding: var(--space-8) var(--space-5); background: var(--white); }
+    .stats-grid {
+      max-width: var(--max-width); margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5);
+    }
+    .stat-card {
+      text-align: center; padding: var(--space-5);
+      border: 1px solid var(--paper-200); border-radius: var(--radius-md);
+    }
+    .stat-icon { font-size: 2rem; margin-bottom: var(--space-2); }
+    .stat-number {
+      font-family: var(--font-primary); font-size: var(--text-h2); font-weight: 700;
+      color: var(--maroon-700);
+    }
+    .stat-label { font-size: var(--text-body-sm); color: var(--paper-500); }
+
+    /* ── Result Card ──────────────────────────────────────────────────── */
+    .results-section { padding: var(--space-8) var(--space-5); }
+    .results-header {
+      max-width: var(--max-width); margin: 0 auto var(--space-6);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .results-count { font-size: var(--text-h3); color: var(--maroon-700); }
+    .results-sort { font-size: var(--text-body-sm); color: var(--paper-500); }
+
+    .results-container {
+      max-width: var(--max-width); margin: 0 auto;
+      display: grid; grid-template-columns: 280px 1fr; gap: var(--space-6);
+    }
+
+    .result-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: var(--radius-md); padding: var(--space-5);
+      margin-bottom: var(--space-4);
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      position: relative;
+    }
+    .result-card:hover {
+      box-shadow: var(--shadow-md); transform: translateY(-1px);
+    }
+    .result-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: var(--space-2);
+    }
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: var(--text-body-sm); font-weight: 600;
+    }
+    .status-badge.available { color: var(--green-700); }
+    .status-badge.checked-out { color: var(--danger); }
+    .status-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--green-500);
+    }
+    .status-badge.checked-out .status-dot { background: var(--danger); }
+    .format-badge {
+      font-size: var(--text-caption); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      color: var(--paper-500); background: var(--paper-100);
+      padding: 2px 8px; border-radius: var(--radius-sm);
+    }
+    .result-title {
+      font-family: var(--font-primary); font-size: var(--text-h3); font-weight: 600;
+      color: var(--maroon-700); line-height: 1.4; margin-bottom: var(--space-2);
+    }
+    .result-title a:hover { color: var(--maroon-500); text-decoration: underline; }
+    .result-meta { font-size: var(--text-body-sm); color: var(--paper-600); margin-bottom: var(--space-3); }
+    .subject-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-3); }
+    .subject-tag {
+      font-size: var(--text-body-sm); color: var(--maroon-700);
+      background: var(--maroon-50); padding: 2px 8px; border-radius: var(--radius-sm);
+      border: 1px solid var(--maroon-100);
+    }
+    .result-actions {
+      display: flex; gap: var(--space-3); margin-top: var(--space-3);
+      padding-top: var(--space-3); border-top: 1px solid var(--paper-200);
+    }
+    .action-btn {
+      font-size: var(--text-body-sm); color: var(--maroon-600);
+      background: none; border: none; cursor: pointer; padding: 4px 0;
+      transition: color 0.2s ease;
+    }
+    .action-btn:hover { color: var(--maroon-800); text-decoration: underline; }
+
+    .live-status {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 12px; border-radius: var(--radius-sm);
+      font-size: var(--text-body-sm); font-weight: 600;
+      background: var(--paper-100); border: 1px solid var(--paper-200);
+      margin-top: var(--space-3);
+    }
+    .live-status.available { background: var(--green-50); border-color: var(--green-500); color: var(--green-700); }
+
+    /* ── Facet Sidebar ────────────────────────────────────────────────── */
+    .facet-sidebar {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: var(--radius-md); padding: var(--space-5); height: fit-content;
+    }
+    .facet-group { margin-bottom: var(--space-5); }
+    .facet-group-title {
+      font-family: var(--font-primary); font-size: var(--text-h4); font-weight: 600;
+      color: var(--maroon-800); margin-bottom: var(--space-3);
+      padding-bottom: var(--space-2); border-bottom: 2px solid var(--gold-500);
+    }
+    .facet-option {
+      display: flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-1) 0; font-size: var(--text-body-sm);
+      color: var(--paper-700); cursor: pointer; transition: color 0.2s ease;
+    }
+    .facet-option:hover { color: var(--maroon-600); }
+    .facet-option input { accent-color: var(--maroon-600); }
+    .facet-count { font-size: var(--text-caption); color: var(--paper-500); margin-left: auto; }
+
+    /* ── Footer ─────────────────────────────────────────────────────── */
+    .footer {
+      background: var(--maroon-800); color: rgba(255,255,255,0.7);
+      padding: var(--space-8) var(--space-5) var(--space-5);
+    }
+    .footer-content {
+      max-width: var(--max-width); margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6);
+    }
+    .footer-title { color: var(--white); font-weight: 600; margin-bottom: var(--space-3); }
+    .footer-link { display: block; color: rgba(255,255,255,0.6); margin-bottom: var(--space-2); }
+    .footer-link:hover { color: var(--white); }
+    .footer-bottom {
+      max-width: var(--max-width); margin: var(--space-6) auto 0;
+      padding-top: var(--space-4); border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center; font-size: var(--text-body-sm);
+    }
+
+    /* ── Responsive ──────────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .results-container { grid-template-columns: 1fr; }
+      .facet-sidebar { display: none; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 640px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: var(--text-h1); }
+      .hero-subtitle { font-size: var(--text-h3); }
+      .hero-search { flex-direction: column; }
+      .hero-search button { width: 100%; }
+      .search-filters { flex-wrap: wrap; }
+      .footer-content { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <div class="logo-icon">B</div>
+        <span>BUET Central Library</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#" class="nav-link active">Home</a></li>
+        <li><a href="#" class="nav-link">Search</a></li>
+        <li><a href="#" class="nav-link">Databases</a></li>
+        <li><a href="#" class="nav-link">Services</a></li>
+        <li><a href="#" class="nav-link">About</a></li>
+      </ul>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode">☀️</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">BUET Central Library</h1>
+      <p class="hero-subtitle">বিশ্বজ্ঞানের সন্ধানে</p>
+      <p class="hero-tagline">In Quest of Knowledge</p>
+      <div class="hero-search">
+        <input type="text" placeholder="Search books, theses, articles...">
+        <button>SEARCH</button>
+      </div>
+      <div class="search-filters">
+        <button class="filter-chip active">All</button>
+        <button class="filter-chip">Physical Books</button>
+        <button class="filter-chip">Digital Theses</button>
+        <button class="filter-chip">Journal Articles</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📚</div>
+        <div class="stat-number">45,000+</div>
+        <div class="stat-label">Physical Books</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">💻</div>
+        <div class="stat-number">12,000+</div>
+        <div class="stat-label">Digital Theses</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📄</div>
+        <div class="stat-number">8,000+</div>
+        <div class="stat-label">Journal Articles</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🌐</div>
+        <div class="stat-number">128+</div>
+        <div class="stat-label">E-Resources</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Results Demo -->
+  <section class="results-section">
+    <div class="results-header">
+      <h2 class="results-count">"machine learning" — 1,245 results</h2>
+      <span class="results-sort">Sort by: Relevance</span>
+    </div>
+    <div class="results-container">
+      <!-- Facet Sidebar -->
+      <aside class="facet-sidebar">
+        <div class="facet-group">
+          <h3 class="facet-group-title">Format</h3>
+          <label class="facet-option"><input type="radio" name="format" checked> All <span class="facet-count">1,245</span></label>
+          <label class="facet-option"><input type="radio" name="format"> Physical <span class="facet-count">892</span></label>
+          <label class="facet-option"><input type="radio" name="format"> Digital <span class="facet-count">342</span></label>
+          <label class="facet-option"><input type="radio" name="format"> Articles <span class="facet-count">11</span></label>
+        </div>
+        <div class="facet-group">
+          <h3 class="facet-group-title">Subject</h3>
+          <label class="facet-option"><input type="checkbox" checked> Civil Engineering <span class="facet-count">45</span></label>
+          <label class="facet-option"><input type="checkbox"> CSE <span class="facet-count">120</span></label>
+          <label class="facet-option"><input type="checkbox"> EEE <span class="facet-count">89</span></label>
+          <label class="facet-option"><input type="checkbox"> Mechanical <span class="facet-count">67</span></label>
+        </div>
+        <div class="facet-group">
+          <h3 class="facet-group-title">Source</h3>
+          <label class="facet-option"><input type="checkbox" checked> Koha <span class="facet-count">892</span></label>
+          <label class="facet-option"><input type="checkbox" checked> DSpace <span class="facet-count">342</span></label>
+          <label class="facet-option"><input type="checkbox"> Crossref <span class="facet-count">11</span></label>
+        </div>
+      </aside>
+
+      <!-- Results -->
+      <div class="results-list">
+        <!-- Result 1: Local -->
+        <article class="result-card">
+          <div class="result-header">
+            <span class="status-badge available">
+              <span class="status-dot"></span> Available
+            </span>
+            <span class="format-badge">Physical Book</span>
+          </div>
+          <h3 class="result-title">
+            <a href="#">Machine Learning for Civil Engineering: A Comprehensive Guide to Structural Health Monitoring</a>
+          </h3>
+          <p class="result-meta">By Rahman, A.K.M. | Karim, S. | BUET Press, 2024</p>
+          <div class="subject-tags">
+            <span class="subject-tag">Civil Engineering</span>
+            <span class="subject-tag">Machine Learning</span>
+            <span class="subject-tag">Structural</span>
+          </div>
+          <div class="result-actions">
+            <button class="action-btn">📖 View in Koha</button>
+            <button class="action-btn">📄 Download PDF</button>
+            <button class="action-btn">🔖 Save</button>
+            <button class="action-btn">📤 Cite</button>
+          </div>
+          <div class="live-status available">
+            <span class="status-dot"></span>
+            Shelf: Central Library Floor 2 | Status: Available
+          </div>
+        </article>
+
+        <!-- Result 2: Federated -->
+        <article class="result-card">
+          <div class="result-header">
+            <span class="status-badge checked-out">
+              <span class="status-dot"></span> Checked Out
+            </span>
+            <span class="format-badge">Physical Book</span>
+          </div>
+          <h3 class="result-title">
+            <a href="#">Deep Learning Approaches for Bridge Defect Detection</a>
+          </h3>
+          <p class="result-meta">By Hassan, M. | Ahmed, T. | Cambridge University Press, 2023</p>
+          <div class="subject-tags">
+            <span class="subject-tag">Civil Engineering</span>
+            <span class="subject-tag">Deep Learning</span>
+          </div>
+          <div class="result-actions">
+            <button class="action-btn">📖 View in Koha</button>
+            <button class="action-btn">🔖 Save</button>
+            <button class="action-btn">📤 Cite</button>
+          </div>
+        </article>
+
+        <!-- Result 3: Digital -->
+        <article class="result-card">
+          <div class="result-header">
+            <span class="status-badge available">
+              <span class="status-dot"></span> Open Access
+            </span>
+            <span class="format-badge">Digital Thesis</span>
+          </div>
+          <h3 class="result-title">
+            <a href="#">Application of Machine Learning in Traffic Flow Prediction: A Case Study of Dhaka City</a>
+          </h3>
+          <p class="result-meta">By Islam, N. | Department of CSE, BUET | 2024</p>
+          <div class="subject-tags">
+            <span class="subject-tag">CSE</span>
+            <span class="subject-tag">Machine Learning</span>
+            <span class="subject-tag">Transportation</span>
+          </div>
+          <div class="result-actions">
+            <button class="action-btn">📖 View in DSpace</button>
+            <button class="action-btn">📄 Download PDF</button>
+            <button class="action-btn">🔖 Save</button>
+            <button class="action-btn">📤 Cite</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <div class="footer-title">About</div>
+        <a href="#" class="footer-link">About BUET Library</a>
+        <a href="#" class="footer-link">Library Hours</a>
+        <a href="#" class="footer-link">Staff Directory</a>
+        <a href="#" class="footer-link">Contact Us</a>
+      </div>
+      <div>
+        <div class="footer-title">Services</div>
+        <a href="#" class="footer-link">Circulation</a>
+        <a href="#" class="footer-link">Reference</a>
+        <a href="#" class="footer-link">Interlibrary Loan</a>
+        <a href="#" class="footer-link">Research Support</a>
+      </div>
+      <div>
+        <div class="footer-title">Resources</div>
+        <a href="#" class="footer-link">E-Resources</a>
+        <a href="#" class="footer-link">DSpace Repository</a>
+        <a href="#" class="footer-link">Koha Catalog</a>
+        <a href="#" class="footer-link">Bangladesh Journals</a>
+      </div>
+      <div>
+        <div class="footer-title">Help</div>
+        <a href="#" class="footer-link">FAQ</a>
+        <a href="#" class="footer-link">User Guides</a>
+        <a href="#" class="footer-link">Citation Tools</a>
+        <a href="#" class="footer-link">Report a Problem</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Bangladesh University of Engineering and Technology (BUET). All rights reserved.</p>
+      <p style="margin-top: 8px; opacity: 0.6;">Designed with pride in Dhaka, Bangladesh.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('buet-theme', next);
+      document.querySelector('.theme-toggle').textContent = next === 'dark' ? '🌙' : '☀️';
+    }
+    // Restore saved theme
+    const saved = localStorage.getItem('buet-theme');
+    if (saved) {
+      document.documentElement.setAttribute('data-theme', saved);
+      document.querySelector('.theme-toggle').textContent = saved === 'dark' ? '🌙' : '☀️';
+    }
+  </script>
+</body>
+</html>
