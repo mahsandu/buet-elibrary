@@ -1,0 +1,45 @@
+name: CI — Validate Python & Docker Compose
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r microservices/requirements.txt
+
+      - name: Check Python syntax
+        run: |
+          python -m py_compile microservices/dspace_etl.py
+          python -m py_compile microservices/koha_etl.py
+          python -m py_compile microservices/live_status.py
+          python -m py_compile microservices/federated_search.py
+          python -m py_compile microservices/utils.py
+          python -m py_compile microservices/cache_warm.py
+          python -m py_compile elasticsearch/setup_index.py
+
+      - name: Validate JSON
+        run: |
+          python -c "import json; json.load(open('elasticsearch/schema.json'))"
+
+      - name: Validate Docker Compose
+        run: |
+          docker compose config > /dev/null
+
+      - name: Shellcheck scripts
+        run: |
+          shellcheck microservices/entrypoint.sh || true

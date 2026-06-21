@@ -1,0 +1,72 @@
+name: Bug Report
+
+description: Report a bug or issue with the BUET E-Library platform
+
+title: "[Bug] "
+
+labels: ["bug"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please fill out the details below.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear description of the bug
+      placeholder: "When I search for 'machine learning', the federated search returns 502 errors..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this issue?
+      placeholder: |
+        1. Go to homepage
+        2. Search for 'machine learning'
+        3. Click 'Journal Articles' filter
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should happen instead?
+      placeholder: "Results should load from Crossref and OpenAlex..."
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which part of the system is affected?
+      options:
+        - Elasticsearch / Search
+        - Drupal Frontend
+        - Microservices (Harvesters)
+        - Live Status Scraper
+        - E-Resource Proxy
+        - Federated Search
+        - Docker / Deployment
+        - Documentation
+        - Other
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, OS, or server environment
+      placeholder: "Chrome 125, Windows 11 / Ubuntu 22.04"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or Screenshots
+      description: Any relevant error logs or screenshots
+      render: shell

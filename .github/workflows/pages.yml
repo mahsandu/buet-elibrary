@@ -1,0 +1,47 @@
+name: Deploy Design Demo to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'design/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare design demo for Pages
+        run: |
+          mkdir -p _site
+          cp design/demo.html _site/index.html
+          cp design/base.css _site/
+          # Fix CSS import path in demo HTML
+          sed -i "s|@import url('base.css');|@import url('base.css');|g" _site/index.html
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
