@@ -3,308 +3,165 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BUET E-Library — Design Demo</title>
+  <title>BUET E-Library — Digital Gateway</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif:wght@400;600;700&family=Noto+Serif+Bengali:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* Import design tokens */
     @import url('base.css');
 
-    /* ── Reset & Base ───────────────────────────────────────────────── */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: var(--font-secondary);
-      font-size: var(--text-body);
-      line-height: 1.6;
-      color: var(--text-primary);
-      background: var(--bg-secondary);
+      font-family: var(--font-secondary); font-size: var(--text-body);
+      line-height: 1.6; color: var(--text-primary); background: var(--bg-secondary);
       transition: background 0.2s ease, color 0.2s ease;
     }
     a { color: var(--link-color); text-decoration: none; transition: color 0.2s ease; }
     a:hover { color: var(--link-hover); text-decoration: underline; }
 
-    /* ── Navigation ─────────────────────────────────────────────────── */
-    .main-nav {
-      position: sticky;
-      top: 0;
-      z-index: 200;
-      background: var(--nav-bg);
-      border-bottom: 3px solid var(--nav-border);
-      padding: 0 var(--space-5);
-    }
-    .nav-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-      color: var(--white);
-      font-family: var(--font-primary);
-      font-size: var(--text-h4);
-      font-weight: 700;
-      text-decoration: none;
-    }
-    .logo-icon {
-      width: 40px; height: 40px;
-      background: var(--gold-500);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-primary); font-size: 20px; color: var(--maroon-700);
-    }
+    /* ── Navigation ── */
+    .main-nav { position: sticky; top: 0; z-index: 200; background: var(--nav-bg); border-bottom: 3px solid var(--nav-border); padding: 0 var(--space-5); }
+    .nav-container { max-width: var(--max-width); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { display: flex; align-items: center; gap: var(--space-3); color: var(--white); font-family: var(--font-primary); font-size: var(--text-h4); font-weight: 700; text-decoration: none; }
+    .logo-icon { width: 40px; height: 40px; background: var(--gold-500); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-primary); font-size: 20px; color: var(--maroon-700); }
     .nav-links { display: flex; gap: var(--space-6); list-style: none; }
-    .nav-link {
-      position: relative;
-      color: rgba(255,255,255,0.85);
-      font-size: var(--text-button); font-weight: 500;
-      padding: 8px 0; text-decoration: none;
-      transition: color 0.2s ease;
-    }
+    .nav-link { position: relative; color: rgba(255,255,255,0.85); font-size: var(--text-button); font-weight: 500; padding: 8px 0; text-decoration: none; transition: color 0.2s ease; }
     .nav-link:hover, .nav-link.active { color: var(--white); }
-    .nav-link::after {
-      content: ''; position: absolute; bottom: 0; left: 0;
-      width: 0; height: 2px; background: var(--gold-500);
-      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--gold-500), var(--blue-500)); transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
     .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-    .theme-toggle {
-      background: none; border: none; cursor: pointer;
-      color: rgba(255,255,255,0.85); font-size: 20px;
-      padding: 8px; border-radius: 50%;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
+    .theme-toggle { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.85); font-size: 20px; padding: 8px; border-radius: 50%; transition: background 0.2s ease, color 0.2s ease; }
     .theme-toggle:hover { background: rgba(255,255,255,0.1); color: var(--white); }
 
-    /* ── Hero Section ───────────────────────────────────────────────── */
-    .hero {
-      background: var(--paper-50);
-      padding: var(--space-10) var(--space-5);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background-image:
-        linear-gradient(var(--paper-200) 1px, transparent 1px),
-        linear-gradient(90deg, var(--paper-200) 1px, transparent 1px);
-      background-size: 40px 40px;
-      opacity: 0.5;
-      pointer-events: none;
-    }
-    .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-    .hero-title {
-      font-family: var(--font-primary);
-      font-size: var(--text-hero); font-weight: 700;
-      color: var(--maroon-700); line-height: 1.1;
-      margin-bottom: var(--space-2);
-    }
-    .hero-subtitle {
-      font-family: var(--font-primary);
-      font-size: var(--text-h2); font-weight: 400;
-      color: var(--paper-600); margin-bottom: var(--space-2);
-    }
-    .hero-tagline {
-      font-size: var(--text-body-lg); color: var(--paper-500);
-      margin-bottom: var(--space-7);
-    }
+    /* ── Hero ── */
+    .hero { background: linear-gradient(135deg, var(--maroon-700), var(--maroon-800)); padding: var(--space-10) var(--space-5); text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" viewBox="0 0 120 60"><path d="M0 30 Q30 10 60 30 T120 30" stroke="rgba(255,255,255,0.05)" stroke-width="2" fill="none"/></svg>'); background-size: 120px 60px; pointer-events: none; }
+    .hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+    .hero-title { font-family: var(--font-primary); font-size: var(--text-hero); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: var(--space-2); }
+    .hero-subtitle { font-family: var(--font-primary); font-size: var(--text-h2); font-weight: 400; color: rgba(255,255,255,0.8); margin-bottom: var(--space-2); }
+    .hero-tagline { font-size: var(--text-body-lg); color: rgba(255,255,255,0.6); margin-bottom: var(--space-7); }
+    .hero-search { display: flex; max-width: 700px; margin: 0 auto; border: 2px solid rgba(255,255,255,0.2); border-radius: var(--radius-lg); overflow: hidden; background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+    .hero-search:focus-within { border-color: var(--gold-500); box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2); }
+    .hero-search input { flex: 1; padding: 16px 20px; border: none; font-family: var(--font-secondary); font-size: var(--text-body-lg); color: var(--white); background: transparent; }
+    .hero-search input::placeholder { color: rgba(255,255,255,0.5); }
+    .hero-search button { padding: 16px 32px; background: var(--gold-500); color: var(--paper-900); font-weight: 600; font-size: var(--text-button); border: none; cursor: pointer; transition: background 0.2s ease; }
+    .hero-search button:hover { background: var(--gold-400); }
+    .hero-filters { display: flex; justify-content: center; gap: var(--space-3); margin-top: var(--space-5); flex-wrap: wrap; }
+    .filter-chip { padding: 8px 16px; border-radius: var(--radius-full); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); font-size: var(--text-body-sm); color: rgba(255,255,255,0.85); cursor: pointer; transition: all 0.2s ease; }
+    .filter-chip:hover, .filter-chip.active { background: var(--gold-500); color: var(--paper-900); border-color: var(--gold-500); }
 
-    /* ── Search Box ─────────────────────────────────────────────────── */
-    .hero-search {
-      display: flex; max-width: 700px; margin: 0 auto;
-      border: 2px solid var(--paper-300); border-radius: var(--radius-lg);
-      overflow: hidden; background: var(--white);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-    .hero-search:focus-within {
-      border-color: var(--maroon-500);
-      box-shadow: 0 0 0 4px rgba(139, 0, 0, 0.08);
-    }
-    .hero-search input {
-      flex: 1; padding: 16px 20px; border: none;
-      font-family: var(--font-secondary); font-size: var(--text-body-lg);
-      color: var(--text-primary); background: transparent;
-    }
-    .hero-search input::placeholder { color: var(--paper-400); }
-    .hero-search button {
-      padding: 16px 32px; background: var(--gold-500); color: var(--paper-900);
-      font-weight: 600; font-size: var(--text-button); border: none;
-      cursor: pointer; transition: background 0.2s ease;
-    }
-    .hero-search button:hover { background: var(--gold-600); }
+    /* ── Database Grid ── */
+    .db-section { padding: var(--space-8) var(--space-5); background: var(--white); }
+    .db-section-title { max-width: var(--max-width); margin: 0 auto var(--space-6); font-family: var(--font-primary); font-size: var(--text-h2); font-weight: 600; color: var(--maroon-700); }
+    .db-grid { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--space-5); }
+    .db-tile { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); padding: var(--space-5); background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease; cursor: pointer; }
+    .db-tile:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .db-icon { width: 80px; height: 80px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-family: var(--font-primary); font-size: 28px; font-weight: 700; color: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+    .db-icon.ieee { background: #00629B; }
+    .db-icon.elsevier { background: #E9711C; }
+    .db-icon.jstor { background: #5F4B8B; }
+    .db-icon.springer { background: #E07800; }
+    .db-icon.wiley { background: #005A84; }
+    .db-icon.acm { background: #1D4C7C; }
+    .db-tile-name { font-weight: 600; color: var(--text-primary); }
+    .db-tile-desc { font-size: var(--text-body-sm); color: var(--paper-500); }
+    .db-tile-access { font-size: var(--text-caption); font-weight: 600; text-transform: uppercase; }
+    .db-tile-access.subscribed { color: var(--green-600); }
+    .db-tile-access.open { color: var(--blue-500); }
 
-    .search-filters {
-      display: flex; justify-content: center; gap: var(--space-3);
-      margin-top: var(--space-5);
-    }
-    .filter-chip {
-      padding: 8px 16px; border-radius: var(--radius-full);
-      background: var(--white); border: 1px solid var(--paper-200);
-      font-size: var(--text-body-sm); color: var(--paper-700);
-      cursor: pointer; transition: all 0.2s ease;
-    }
-    .filter-chip:hover, .filter-chip.active {
-      background: var(--maroon-600); color: var(--white); border-color: var(--maroon-600);
-    }
-
-    /* ── Stats Section ──────────────────────────────────────────────── */
-    .stats { padding: var(--space-8) var(--space-5); background: var(--white); }
-    .stats-grid {
-      max-width: var(--max-width); margin: 0 auto;
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5);
-    }
-    .stat-card {
-      text-align: center; padding: var(--space-5);
-      border: 1px solid var(--paper-200); border-radius: var(--radius-md);
-    }
+    /* ── Stats & Reference ── */
+    .stats-ref { padding: var(--space-8) var(--space-5); background: var(--paper-50); }
+    .stats-ref-grid { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-6); }
+    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+    .stat-card { text-align: center; padding: var(--space-5); background: var(--white); border: 1px solid var(--paper-200); border-radius: var(--radius-md); }
     .stat-icon { font-size: 2rem; margin-bottom: var(--space-2); }
-    .stat-number {
-      font-family: var(--font-primary); font-size: var(--text-h2); font-weight: 700;
-      color: var(--maroon-700);
-    }
+    .stat-number { font-family: var(--font-primary); font-size: var(--text-h2); font-weight: 700; color: var(--maroon-700); }
     .stat-label { font-size: var(--text-body-sm); color: var(--paper-500); }
+    .reference-widget { background: var(--white); border: 1px solid var(--paper-200); border-radius: var(--radius-lg); padding: var(--space-5); }
+    .widget-title { font-family: var(--font-primary); font-size: var(--text-h4); font-weight: 600; color: var(--maroon-800); margin-bottom: var(--space-4); padding-bottom: var(--space-2); border-bottom: 2px solid var(--gold-500); }
+    .widget-option { padding: var(--space-3) 0; border-bottom: 1px solid var(--paper-200); }
+    .widget-option:last-child { border-bottom: none; }
+    .widget-option-title { font-weight: 600; color: var(--text-primary); margin-bottom: var(--space-1); }
+    .widget-option-desc { font-size: var(--text-body-sm); color: var(--paper-500); margin-bottom: var(--space-2); }
+    .widget-btn { display: inline-block; padding: 6px 16px; background: var(--maroon-600); color: var(--white); font-size: var(--text-button); font-weight: 600; border: none; border-radius: var(--radius-md); cursor: pointer; transition: background 0.2s ease; }
+    .widget-btn:hover { background: var(--maroon-700); }
+    .widget-btn.secondary { background: transparent; color: var(--maroon-600); border: 1px solid var(--maroon-200); }
+    .widget-btn.secondary:hover { background: var(--maroon-50); }
+    .reference-pulse { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: var(--radius-full); background: var(--green-50); border: 1px solid var(--green-500); font-size: var(--text-body-sm); font-weight: 600; color: var(--green-700); margin-bottom: var(--space-3); }
+    .pulse-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green-500); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
 
-    /* ── Result Card ──────────────────────────────────────────────────── */
-    .results-section { padding: var(--space-8) var(--space-5); }
-    .results-header {
-      max-width: var(--max-width); margin: 0 auto var(--space-6);
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .results-count { font-size: var(--text-h3); color: var(--maroon-700); }
-    .results-sort { font-size: var(--text-body-sm); color: var(--paper-500); }
+    /* ── Repository Section ── */
+    .repo-section { padding: var(--space-8) var(--space-5); background: var(--white); }
+    .repo-section-title { max-width: var(--max-width); margin: 0 auto var(--space-6); font-family: var(--font-primary); font-size: var(--text-h2); font-weight: 600; color: var(--maroon-700); }
+    .repo-grid { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--space-5); }
+    .repo-card { position: relative; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: var(--space-5); overflow: hidden; transition: box-shadow 0.2s ease, transform 0.2s ease; }
+    .repo-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .oa-ribbon { position: absolute; top: 16px; right: -32px; width: 120px; padding: 4px 0; background: var(--blue-500); color: var(--white); font-size: var(--text-caption); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; text-align: center; transform: rotate(45deg); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .repo-type { font-size: var(--text-caption); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--paper-500); margin-bottom: var(--space-2); }
+    .repo-title { font-family: var(--font-primary); font-size: var(--text-h3); font-weight: 600; color: var(--maroon-700); line-height: 1.4; margin-bottom: var(--space-2); }
+    .repo-meta { font-size: var(--text-body-sm); color: var(--paper-600); margin-bottom: var(--space-3); }
+    .repo-doi { font-family: var(--font-mono); font-size: var(--text-body-sm); color: var(--blue-500); margin-bottom: var(--space-3); }
+    .repo-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+    .repo-action { font-size: var(--text-body-sm); color: var(--maroon-600); background: none; border: none; cursor: pointer; padding: 4px 0; transition: color 0.2s ease; }
+    .repo-action:hover { color: var(--maroon-800); text-decoration: underline; }
 
-    .results-container {
-      max-width: var(--max-width); margin: 0 auto;
-      display: grid; grid-template-columns: 280px 1fr; gap: var(--space-6);
-    }
+    /* ── E-Resource Results ── */
+    .eresource-section { padding: var(--space-8) var(--space-5); background: var(--paper-50); }
+    .eresource-section-title { max-width: var(--max-width); margin: 0 auto var(--space-6); font-family: var(--font-primary); font-size: var(--text-h2); font-weight: 600; color: var(--maroon-700); }
+    .eresource-list { max-width: var(--max-width); margin: 0 auto; }
+    .db-card { display: flex; align-items: flex-start; gap: var(--space-4); padding: var(--space-5); background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; margin-bottom: var(--space-4); transition: box-shadow 0.2s ease, transform 0.2s ease; }
+    .db-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .db-card-icon { width: 64px; height: 64px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: var(--font-primary); font-size: 22px; font-weight: 700; color: var(--white); flex-shrink: 0; }
+    .db-card-info { flex: 1; }
+    .db-card-title { font-family: var(--font-primary); font-size: var(--text-h3); font-weight: 600; color: var(--maroon-700); margin-bottom: var(--space-1); }
+    .db-card-subjects { font-size: var(--text-body-sm); color: var(--paper-600); margin-bottom: var(--space-2); }
+    .db-card-access { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-body-sm); font-weight: 600; }
+    .db-card-access.subscribed { color: var(--green-700); }
+    .db-card-access.open { color: var(--blue-700); }
+    .db-card-btn { margin-top: var(--space-3); padding: 8px 20px; background: var(--maroon-600); color: var(--white); font-size: var(--text-button); font-weight: 600; border: none; border-radius: var(--radius-md); cursor: pointer; transition: background 0.2s ease; }
+    .db-card-btn:hover { background: var(--maroon-700); }
 
-    .result-card {
-      background: var(--card-bg); border: 1px solid var(--card-border);
-      border-radius: var(--radius-md); padding: var(--space-5);
-      margin-bottom: var(--space-4);
-      transition: box-shadow 0.2s ease, transform 0.2s ease;
-      position: relative;
-    }
-    .result-card:hover {
-      box-shadow: var(--shadow-md); transform: translateY(-1px);
-    }
-    .result-header {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: var(--space-2);
-    }
-    .status-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: var(--text-body-sm); font-weight: 600;
-    }
-    .status-badge.available { color: var(--green-700); }
-    .status-badge.checked-out { color: var(--danger); }
-    .status-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--green-500);
-    }
-    .status-badge.checked-out .status-dot { background: var(--danger); }
-    .format-badge {
-      font-size: var(--text-caption); font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.05em;
-      color: var(--paper-500); background: var(--paper-100);
-      padding: 2px 8px; border-radius: var(--radius-sm);
-    }
-    .result-title {
-      font-family: var(--font-primary); font-size: var(--text-h3); font-weight: 600;
-      color: var(--maroon-700); line-height: 1.4; margin-bottom: var(--space-2);
-    }
-    .result-title a:hover { color: var(--maroon-500); text-decoration: underline; }
-    .result-meta { font-size: var(--text-body-sm); color: var(--paper-600); margin-bottom: var(--space-3); }
-    .subject-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-3); }
-    .subject-tag {
-      font-size: var(--text-body-sm); color: var(--maroon-700);
-      background: var(--maroon-50); padding: 2px 8px; border-radius: var(--radius-sm);
-      border: 1px solid var(--maroon-100);
-    }
-    .result-actions {
-      display: flex; gap: var(--space-3); margin-top: var(--space-3);
-      padding-top: var(--space-3); border-top: 1px solid var(--paper-200);
-    }
-    .action-btn {
-      font-size: var(--text-body-sm); color: var(--maroon-600);
-      background: none; border: none; cursor: pointer; padding: 4px 0;
-      transition: color 0.2s ease;
-    }
-    .action-btn:hover { color: var(--maroon-800); text-decoration: underline; }
+    /* ── Federated Results ── */
+    .federated-section { padding: var(--space-8) var(--space-5); background: var(--white); }
+    .federated-section-title { max-width: var(--max-width); margin: 0 auto var(--space-6); font-family: var(--font-primary); font-size: var(--text-h2); font-weight: 600; color: var(--maroon-700); }
+    .federated-list { max-width: var(--max-width); margin: 0 auto; }
+    .federated-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: var(--space-5); margin-bottom: var(--space-4); border-left: 4px solid var(--blue-500); transition: box-shadow 0.2s ease; }
+    .federated-card:hover { box-shadow: var(--shadow-md); }
+    .federated-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2); flex-wrap: wrap; gap: var(--space-2); }
+    .federated-source { font-size: var(--text-caption); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--paper-500); }
+    .oa-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; background: var(--blue-50); color: var(--blue-700); font-size: var(--text-caption); font-weight: 600; border-radius: var(--radius-sm); border: 1px solid var(--blue-100); }
+    .federated-title { font-family: var(--font-primary); font-size: var(--text-h3); font-weight: 600; color: var(--maroon-700); line-height: 1.4; margin-bottom: var(--space-2); }
+    .federated-authors { font-size: var(--text-body-sm); color: var(--paper-600); margin-bottom: var(--space-1); }
+    .federated-venue { font-size: var(--text-body-sm); color: var(--paper-500); margin-bottom: var(--space-2); }
+    .federated-doi { font-family: var(--font-mono); font-size: var(--text-body-sm); color: var(--blue-500); margin-bottom: var(--space-3); }
+    .federated-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+    .federated-action { font-size: var(--text-body-sm); color: var(--maroon-600); background: none; border: none; cursor: pointer; padding: 4px 0; transition: color 0.2s ease; }
+    .federated-action:hover { color: var(--maroon-800); text-decoration: underline; }
 
-    .live-status {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 12px; border-radius: var(--radius-sm);
-      font-size: var(--text-body-sm); font-weight: 600;
-      background: var(--paper-100); border: 1px solid var(--paper-200);
-      margin-top: var(--space-3);
-    }
-    .live-status.available { background: var(--green-50); border-color: var(--green-500); color: var(--green-700); }
-
-    /* ── Facet Sidebar ────────────────────────────────────────────────── */
-    .facet-sidebar {
-      background: var(--card-bg); border: 1px solid var(--card-border);
-      border-radius: var(--radius-md); padding: var(--space-5); height: fit-content;
-    }
-    .facet-group { margin-bottom: var(--space-5); }
-    .facet-group-title {
-      font-family: var(--font-primary); font-size: var(--text-h4); font-weight: 600;
-      color: var(--maroon-800); margin-bottom: var(--space-3);
-      padding-bottom: var(--space-2); border-bottom: 2px solid var(--gold-500);
-    }
-    .facet-option {
-      display: flex; align-items: center; gap: var(--space-2);
-      padding: var(--space-1) 0; font-size: var(--text-body-sm);
-      color: var(--paper-700); cursor: pointer; transition: color 0.2s ease;
-    }
-    .facet-option:hover { color: var(--maroon-600); }
-    .facet-option input { accent-color: var(--maroon-600); }
-    .facet-count { font-size: var(--text-caption); color: var(--paper-500); margin-left: auto; }
-
-    /* ── Footer ─────────────────────────────────────────────────────── */
-    .footer {
-      background: var(--maroon-800); color: rgba(255,255,255,0.7);
-      padding: var(--space-8) var(--space-5) var(--space-5);
-    }
-    .footer-content {
-      max-width: var(--max-width); margin: 0 auto;
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6);
-    }
+    /* ── Footer ── */
+    .footer { background: var(--maroon-800); color: rgba(255,255,255,0.7); padding: var(--space-8) var(--space-5) var(--space-5); }
+    .footer-content { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); }
     .footer-title { color: var(--white); font-weight: 600; margin-bottom: var(--space-3); }
     .footer-link { display: block; color: rgba(255,255,255,0.6); margin-bottom: var(--space-2); }
     .footer-link:hover { color: var(--white); }
-    .footer-bottom {
-      max-width: var(--max-width); margin: var(--space-6) auto 0;
-      padding-top: var(--space-4); border-top: 1px solid rgba(255,255,255,0.1);
-      text-align: center; font-size: var(--text-body-sm);
-    }
+    .footer-bottom { max-width: var(--max-width); margin: var(--space-6) auto 0; padding-top: var(--space-4); border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: var(--text-body-sm); }
 
-    /* ── Responsive ──────────────────────────────────────────────────── */
+    /* ── Responsive ── */
     @media (max-width: 1024px) {
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .results-container { grid-template-columns: 1fr; }
-      .facet-sidebar { display: none; }
+      .stats-ref-grid { grid-template-columns: 1fr; }
+      .footer-content { grid-template-columns: repeat(2, 1fr); }
       .nav-links { display: none; }
     }
     @media (max-width: 640px) {
-      .stats-grid { grid-template-columns: 1fr; }
       .hero-title { font-size: var(--text-h1); }
       .hero-subtitle { font-size: var(--text-h3); }
       .hero-search { flex-direction: column; }
       .hero-search button { width: 100%; }
-      .search-filters { flex-wrap: wrap; }
-      .footer-content { grid-template-columns: 1fr 1fr; }
+      .hero-filters { flex-wrap: wrap; }
+      .db-grid { grid-template-columns: repeat(2, 1fr); }
+      .repo-grid { grid-template-columns: 1fr; }
+      .footer-content { grid-template-columns: 1fr; }
+      .db-card { flex-direction: column; }
     }
   </style>
 </head>
@@ -315,12 +172,12 @@
     <div class="nav-container">
       <a href="#" class="logo">
         <div class="logo-icon">B</div>
-        <span>BUET Central Library</span>
+        <span>BUET E-Library</span>
       </a>
       <ul class="nav-links">
-        <li><a href="#" class="nav-link active">Home</a></li>
-        <li><a href="#" class="nav-link">Search</a></li>
-        <li><a href="#" class="nav-link">Databases</a></li>
+        <li><a href="#" class="nav-link active">E-Resources</a></li>
+        <li><a href="#" class="nav-link">Repository</a></li>
+        <li><a href="#" class="nav-link">Reference</a></li>
         <li><a href="#" class="nav-link">Services</a></li>
         <li><a href="#" class="nav-link">About</a></li>
       </ul>
@@ -331,158 +188,227 @@
   <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
-      <h1 class="hero-title">BUET Central Library</h1>
-      <p class="hero-subtitle">বিশ্বজ্ঞানের সন্ধানে</p>
-      <p class="hero-tagline">In Quest of Knowledge</p>
+      <h1 class="hero-title">BUET E-Library</h1>
+      <p class="hero-subtitle">বিশ্বজ্ঞানের ডিজিটাল প্রবেশদ্বার</p>
+      <p class="hero-tagline">Digital Gateway to Knowledge</p>
       <div class="hero-search">
-        <input type="text" placeholder="Search books, theses, articles...">
+        <input type="text" placeholder="Search e-resources, theses, articles, databases...">
         <button>SEARCH</button>
       </div>
-      <div class="search-filters">
+      <div class="hero-filters">
         <button class="filter-chip active">All</button>
-        <button class="filter-chip">Physical Books</button>
-        <button class="filter-chip">Digital Theses</button>
+        <button class="filter-chip">E-Resources</button>
+        <button class="filter-chip">Repository</button>
         <button class="filter-chip">Journal Articles</button>
       </div>
     </div>
   </section>
 
-  <!-- Stats -->
-  <section class="stats">
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-icon">📚</div>
-        <div class="stat-number">45,000+</div>
-        <div class="stat-label">Physical Books</div>
+  <!-- Database Browser -->
+  <section class="db-section">
+    <h2 class="db-section-title">Browse E-Resource Databases</h2>
+    <div class="db-grid">
+      <div class="db-tile">
+        <div class="db-icon ieee">X</div>
+        <div class="db-tile-name">IEEE Xplore</div>
+        <div class="db-tile-desc">Engineering, CS, Electronics</div>
+        <div class="db-tile-access subscribed">🟢 Subscribed</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon">💻</div>
-        <div class="stat-number">12,000+</div>
-        <div class="stat-label">Digital Theses</div>
+      <div class="db-tile">
+        <div class="db-icon elsevier">E</div>
+        <div class="db-tile-name">Elsevier</div>
+        <div class="db-tile-desc">ScienceDirect, Scopus</div>
+        <div class="db-tile-access subscribed">🟢 Subscribed</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon">📄</div>
-        <div class="stat-number">8,000+</div>
-        <div class="stat-label">Journal Articles</div>
+      <div class="db-tile">
+        <div class="db-icon jstor">J</div>
+        <div class="db-tile-name">JSTOR</div>
+        <div class="db-tile-desc">Arts, Humanities, Social Sci</div>
+        <div class="db-tile-access open">🔵 Open Access</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon">🌐</div>
-        <div class="stat-number">128+</div>
-        <div class="stat-label">E-Resources</div>
+      <div class="db-tile">
+        <div class="db-icon springer">S</div>
+        <div class="db-tile-name">Springer</div>
+        <div class="db-tile-desc">Journals, Books, Protocols</div>
+        <div class="db-tile-access subscribed">🟢 Subscribed</div>
+      </div>
+      <div class="db-tile">
+        <div class="db-icon wiley">W</div>
+        <div class="db-tile-name">Wiley</div>
+        <div class="db-tile-desc">Online Library</div>
+        <div class="db-tile-access subscribed">🟢 Subscribed</div>
+      </div>
+      <div class="db-tile">
+        <div class="db-icon acm">A</div>
+        <div class="db-tile-name">ACM</div>
+        <div class="db-tile-desc">Digital Library</div>
+        <div class="db-tile-access subscribed">🟢 Subscribed</div>
       </div>
     </div>
   </section>
 
-  <!-- Search Results Demo -->
-  <section class="results-section">
-    <div class="results-header">
-      <h2 class="results-count">"machine learning" — 1,245 results</h2>
-      <span class="results-sort">Sort by: Relevance</span>
-    </div>
-    <div class="results-container">
-      <!-- Facet Sidebar -->
-      <aside class="facet-sidebar">
-        <div class="facet-group">
-          <h3 class="facet-group-title">Format</h3>
-          <label class="facet-option"><input type="radio" name="format" checked> All <span class="facet-count">1,245</span></label>
-          <label class="facet-option"><input type="radio" name="format"> Physical <span class="facet-count">892</span></label>
-          <label class="facet-option"><input type="radio" name="format"> Digital <span class="facet-count">342</span></label>
-          <label class="facet-option"><input type="radio" name="format"> Articles <span class="facet-count">11</span></label>
+  <!-- Stats & Reference -->
+  <section class="stats-ref">
+    <div class="stats-ref-grid">
+      <div>
+        <h2 class="db-section-title">Digital Collections</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">🌐</div>
+            <div class="stat-number">128+</div>
+            <div class="stat-label">E-Databases</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📄</div>
+            <div class="stat-number">12,000+</div>
+            <div class="stat-label">Theses (IR)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">💻</div>
+            <div class="stat-number">45,000+</div>
+            <div class="stat-label">E-Books</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🔬</div>
+            <div class="stat-number">8,000+</div>
+            <div class="stat-label">Journal Articles</div>
+          </div>
         </div>
-        <div class="facet-group">
-          <h3 class="facet-group-title">Subject</h3>
-          <label class="facet-option"><input type="checkbox" checked> Civil Engineering <span class="facet-count">45</span></label>
-          <label class="facet-option"><input type="checkbox"> CSE <span class="facet-count">120</span></label>
-          <label class="facet-option"><input type="checkbox"> EEE <span class="facet-count">89</span></label>
-          <label class="facet-option"><input type="checkbox"> Mechanical <span class="facet-count">67</span></label>
-        </div>
-        <div class="facet-group">
-          <h3 class="facet-group-title">Source</h3>
-          <label class="facet-option"><input type="checkbox" checked> Koha <span class="facet-count">892</span></label>
-          <label class="facet-option"><input type="checkbox" checked> DSpace <span class="facet-count">342</span></label>
-          <label class="facet-option"><input type="checkbox"> Crossref <span class="facet-count">11</span></label>
-        </div>
-      </aside>
-
-      <!-- Results -->
-      <div class="results-list">
-        <!-- Result 1: Local -->
-        <article class="result-card">
-          <div class="result-header">
-            <span class="status-badge available">
-              <span class="status-dot"></span> Available
-            </span>
-            <span class="format-badge">Physical Book</span>
-          </div>
-          <h3 class="result-title">
-            <a href="#">Machine Learning for Civil Engineering: A Comprehensive Guide to Structural Health Monitoring</a>
-          </h3>
-          <p class="result-meta">By Rahman, A.K.M. | Karim, S. | BUET Press, 2024</p>
-          <div class="subject-tags">
-            <span class="subject-tag">Civil Engineering</span>
-            <span class="subject-tag">Machine Learning</span>
-            <span class="subject-tag">Structural</span>
-          </div>
-          <div class="result-actions">
-            <button class="action-btn">📖 View in Koha</button>
-            <button class="action-btn">📄 Download PDF</button>
-            <button class="action-btn">🔖 Save</button>
-            <button class="action-btn">📤 Cite</button>
-          </div>
-          <div class="live-status available">
-            <span class="status-dot"></span>
-            Shelf: Central Library Floor 2 | Status: Available
-          </div>
-        </article>
-
-        <!-- Result 2: Federated -->
-        <article class="result-card">
-          <div class="result-header">
-            <span class="status-badge checked-out">
-              <span class="status-dot"></span> Checked Out
-            </span>
-            <span class="format-badge">Physical Book</span>
-          </div>
-          <h3 class="result-title">
-            <a href="#">Deep Learning Approaches for Bridge Defect Detection</a>
-          </h3>
-          <p class="result-meta">By Hassan, M. | Ahmed, T. | Cambridge University Press, 2023</p>
-          <div class="subject-tags">
-            <span class="subject-tag">Civil Engineering</span>
-            <span class="subject-tag">Deep Learning</span>
-          </div>
-          <div class="result-actions">
-            <button class="action-btn">📖 View in Koha</button>
-            <button class="action-btn">🔖 Save</button>
-            <button class="action-btn">📤 Cite</button>
-          </div>
-        </article>
-
-        <!-- Result 3: Digital -->
-        <article class="result-card">
-          <div class="result-header">
-            <span class="status-badge available">
-              <span class="status-dot"></span> Open Access
-            </span>
-            <span class="format-badge">Digital Thesis</span>
-          </div>
-          <h3 class="result-title">
-            <a href="#">Application of Machine Learning in Traffic Flow Prediction: A Case Study of Dhaka City</a>
-          </h3>
-          <p class="result-meta">By Islam, N. | Department of CSE, BUET | 2024</p>
-          <div class="subject-tags">
-            <span class="subject-tag">CSE</span>
-            <span class="subject-tag">Machine Learning</span>
-            <span class="subject-tag">Transportation</span>
-          </div>
-          <div class="result-actions">
-            <button class="action-btn">📖 View in DSpace</button>
-            <button class="action-btn">📄 Download PDF</button>
-            <button class="action-btn">🔖 Save</button>
-            <button class="action-btn">📤 Cite</button>
-          </div>
-        </article>
       </div>
+      <div class="reference-widget">
+        <h3 class="widget-title">Reference Desk</h3>
+        <div class="reference-pulse">
+          <span class="pulse-dot"></span> Librarian Online
+        </div>
+        <div class="widget-option">
+          <div class="widget-option-title">💬 Live Chat</div>
+          <div class="widget-option-desc">Ask a question in real time</div>
+          <button class="widget-btn">Start Chat</button>
+        </div>
+        <div class="widget-option">
+          <div class="widget-option-title">📧 Submit Question</div>
+          <div class="widget-option-desc">Get a response within 24 hours</div>
+          <button class="widget-btn secondary">Ask Question</button>
+        </div>
+        <div class="widget-option">
+          <div class="widget-option-title">📅 Book Consultation</div>
+          <div class="widget-option-desc">Schedule a research session</div>
+          <button class="widget-btn secondary">Book Session</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Repository Items -->
+  <section class="repo-section">
+    <h2 class="repo-section-title">Newly Added to Institutional Repository</h2>
+    <div class="repo-grid">
+      <article class="repo-card">
+        <div class="oa-ribbon">Open Access</div>
+        <div class="repo-type">M.Sc. Thesis — CSE, BUET</div>
+        <h3 class="repo-title">Traffic Flow Prediction in Dhaka Using Deep Learning</h3>
+        <p class="repo-meta">By Islam, N. | 2024</p>
+        <p class="repo-doi">DOI: 10.1234/buet.cse.2024.001</p>
+        <div class="repo-actions">
+          <button class="repo-action">📄 Download PDF</button>
+          <button class="repo-action">🔖 Save</button>
+          <button class="repo-action">📤 Cite</button>
+        </div>
+      </article>
+      <article class="repo-card">
+        <div class="oa-ribbon">Open Access</div>
+        <div class="repo-type">B.Sc. Thesis — Civil, BUET</div>
+        <h3 class="repo-title">Structural Analysis of High-Rise Buildings in Dhaka</h3>
+        <p class="repo-meta">By Rahman, S. | 2023</p>
+        <p class="repo-doi">DOI: 10.1234/buet.civil.2023.045</p>
+        <div class="repo-actions">
+          <button class="repo-action">📄 Download PDF</button>
+          <button class="repo-action">🔖 Save</button>
+          <button class="repo-action">📤 Cite</button>
+        </div>
+      </article>
+      <article class="repo-card">
+        <div class="repo-type">Research Paper — EEE, BUET</div>
+        <h3 class="repo-title">Optimization of Solar Panel Efficiency in Tropical Climates</h3>
+        <p class="repo-meta">By Karim, A. | Ahmed, T. | 2024</p>
+        <p class="repo-doi">DOI: 10.1234/buet.eee.2024.112</p>
+        <div class="repo-actions">
+          <button class="repo-action">📄 Download PDF</button>
+          <button class="repo-action">🔖 Save</button>
+          <button class="repo-action">📤 Cite</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- E-Resource List -->
+  <section class="eresource-section">
+    <h2 class="eresource-section-title">Popular E-Resources</h2>
+    <div class="eresource-list">
+      <div class="db-card">
+        <div class="db-card-icon" style="background:#00629B;">X</div>
+        <div class="db-card-info">
+          <h3 class="db-card-title">IEEE Xplore Digital Library</h3>
+          <p class="db-card-subjects">Engineering, Computer Science, Electronics, Electrical Engineering</p>
+          <span class="db-card-access subscribed">🟢 Subscribed — Full Access</span>
+          <br><button class="db-card-btn">Launch Database →</button>
+        </div>
+      </div>
+      <div class="db-card">
+        <div class="db-card-icon" style="background:#E9711C;">E</div>
+        <div class="db-card-info">
+          <h3 class="db-card-title">Elsevier ScienceDirect</h3>
+          <p class="db-card-subjects">Engineering, Applied Sciences, Chemistry, Physics</p>
+          <span class="db-card-access subscribed">🟢 Subscribed — Full Access</span>
+          <br><button class="db-card-btn">Launch Database →</button>
+        </div>
+      </div>
+      <div class="db-card">
+        <div class="db-card-icon" style="background:#5F4B8B;">J</div>
+        <div class="db-card-info">
+          <h3 class="db-card-title">JSTOR Digital Library</h3>
+          <p class="db-card-subjects">Arts, Humanities, Social Sciences, History, Political Science</p>
+          <span class="db-card-access open">🔵 Open Access + Subscribed</span>
+          <br><button class="db-card-btn">Launch Database →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Federated Search Results -->
+  <section class="federated-section">
+    <h2 class="federated-section-title">Global Scholarly Content</h2>
+    <div class="federated-list">
+      <article class="federated-card">
+        <div class="federated-header">
+          <span class="federated-source">🌐 Crossref</span>
+          <span class="oa-badge">🔓 Open Access</span>
+        </div>
+        <h3 class="federated-title">Deep Reinforcement Learning for Bridge Health Monitoring</h3>
+        <p class="federated-authors">Smith, J., Rahman, A.K.M., Karim, S.</p>
+        <p class="federated-venue">Structural Health Monitoring, Vol. 23, 2024</p>
+        <p class="federated-doi">DOI: 10.1177/14759217241234567</p>
+        <div class="federated-actions">
+          <button class="federated-action">📄 Full Text</button>
+          <button class="federated-action">🔖 Save</button>
+          <button class="federated-action">📤 Cite</button>
+        </div>
+      </article>
+      <article class="federated-card">
+        <div class="federated-header">
+          <span class="federated-source">🌐 OpenAlex</span>
+          <span class="oa-badge">🔓 Open Access</span>
+        </div>
+        <h3 class="federated-title">Machine Learning Approaches for Traffic Congestion Prediction in Developing Cities</h3>
+        <p class="federated-authors">Hassan, M., Ahmed, T., Islam, N.</p>
+        <p class="federated-venue">Transportation Research Part C, 2023</p>
+        <p class="federated-doi">DOI: 10.1016/j.trc.2023.103456</p>
+        <div class="federated-actions">
+          <button class="federated-action">📄 Full Text</button>
+          <button class="federated-action">🔖 Save</button>
+          <button class="federated-action">📤 Cite</button>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -491,36 +417,36 @@
     <div class="footer-content">
       <div>
         <div class="footer-title">About</div>
-        <a href="#" class="footer-link">About BUET Library</a>
-        <a href="#" class="footer-link">Library Hours</a>
-        <a href="#" class="footer-link">Staff Directory</a>
+        <a href="#" class="footer-link">About BUET E-Library</a>
+        <a href="#" class="footer-link">Institutional Repository</a>
+        <a href="#" class="footer-link">DSpace</a>
         <a href="#" class="footer-link">Contact Us</a>
       </div>
       <div>
-        <div class="footer-title">Services</div>
-        <a href="#" class="footer-link">Circulation</a>
-        <a href="#" class="footer-link">Reference</a>
-        <a href="#" class="footer-link">Interlibrary Loan</a>
-        <a href="#" class="footer-link">Research Support</a>
+        <div class="footer-title">E-Resources</div>
+        <a href="#" class="footer-link">Databases A-Z</a>
+        <a href="#" class="footer-link">E-Journals</a>
+        <a href="#" class="footer-link">E-Books</a>
+        <a href="#" class="footer-link">Open Access</a>
       </div>
       <div>
-        <div class="footer-title">Resources</div>
-        <a href="#" class="footer-link">E-Resources</a>
-        <a href="#" class="footer-link">DSpace Repository</a>
-        <a href="#" class="footer-link">Koha Catalog</a>
-        <a href="#" class="footer-link">Bangladesh Journals</a>
+        <div class="footer-title">Services</div>
+        <a href="#" class="footer-link">Reference Desk</a>
+        <a href="#" class="footer-link">Research Guides</a>
+        <a href="#" class="footer-link">Citation Tools</a>
+        <a href="#" class="footer-link">Literature Review Support</a>
       </div>
       <div>
         <div class="footer-title">Help</div>
         <a href="#" class="footer-link">FAQ</a>
-        <a href="#" class="footer-link">User Guides</a>
-        <a href="#" class="footer-link">Citation Tools</a>
+        <a href="#" class="footer-link">Off-Campus Access</a>
+        <a href="#" class="footer-link">Citation Styles</a>
         <a href="#" class="footer-link">Report a Problem</a>
       </div>
     </div>
     <div class="footer-bottom">
       <p>© 2026 Bangladesh University of Engineering and Technology (BUET). All rights reserved.</p>
-      <p style="margin-top: 8px; opacity: 0.6;">Designed with pride in Dhaka, Bangladesh.</p>
+      <p style="margin-top: 8px; opacity: 0.6;">Digital Gateway to Knowledge — Designed in Dhaka, Bangladesh.</p>
     </div>
   </footer>
 
@@ -533,7 +459,6 @@
       localStorage.setItem('buet-theme', next);
       document.querySelector('.theme-toggle').textContent = next === 'dark' ? '🌙' : '☀️';
     }
-    // Restore saved theme
     const saved = localStorage.getItem('buet-theme');
     if (saved) {
       document.documentElement.setAttribute('data-theme', saved);

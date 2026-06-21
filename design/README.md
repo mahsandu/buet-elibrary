@@ -1,6 +1,6 @@
 # BUET E-Library Design System — "Bishwo"
 
-This folder contains the complete visual design specification for the BUET Central Library e-discovery platform. It is designed to be implemented as a **custom Drupal 11 theme**.
+This folder contains the complete visual design specification for the **BUET E-Library** — a digital-first discovery platform for e-resources, institutional repository, and reference services.
 
 ---
 
@@ -8,154 +8,48 @@ This folder contains the complete visual design specification for the BUET Centr
 
 | File | Description |
 |------|-------------|
-| `design.md` | Complete design system — colors, typography, layout, components, dark mode, accessibility |
-| `base.css` | CSS custom properties (variables) — all design tokens in one file |
-| `demo.html` | **Interactive HTML demo** — open this in a browser to see the design in action (light/dark mode toggle, search cards, facets) |
+| `design.md` | Complete design spec — e-library focused (40KB) |
+| `base.css` | CSS custom properties — all design tokens + blue digital accent |
+| `demo.html` | **Interactive HTML demo** — open in browser to see e-library UI |
+| `README.md` | This file — quick start for developers |
 
 ---
 
-## Design Philosophy: "Bishwo" (বিশ্ব — The World of Knowledge)
+## What's Different from a Physical Library Design?
 
-The design draws from three anchors:
+This design is **exclusively for an electronic library** — no physical books, no shelves, no checkout counters. The UI focuses on:
 
-1. **BUET Institutional Identity** — Maroon authority, gold excellence, engineering precision
-2. **Bangladeshi Heritage** — Subtle Jamdani textile patterns, terracotta warmth, natural materials
-3. **Engineering Modernism** — Grid systems, blueprint aesthetics, technical precision
-
-The result is a warm, authoritative, and distinctly Bangladeshi digital space that feels like a modern extension of the BUET campus rather than a generic SaaS template.
-
----
-
-## Quick Start for Developers
-
-### 1. Preview the Design
-
-Open `demo.html` in any modern browser. It includes:
-- Responsive navigation with gold "tassel" active indicator
-- Hero search with blueprint grid background
-- Search result cards with live status badges
-- Facet sidebar with Jamdani-inspired gold borders
-- Dark mode toggle (☀️/🌙)
-- Stats cards and footer
-
-### 2. Use the CSS Variables
-
-Import `base.css` into your Drupal theme to get all design tokens:
-
-```css
-@import url('base.css');
-
-/* Now use the variables anywhere */
-.my-component {
-  background: var(--maroon-600);
-  color: var(--white);
-  padding: var(--space-4);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
-}
-```
-
-### 3. Implement Dark Mode
-
-Add the `data-theme` attribute to `<html>`:
-
-```html
-<html data-theme="dark">
-```
-
-Or toggle via JavaScript (see `demo.html` for the full implementation):
-
-```javascript
-document.documentElement.setAttribute('data-theme', 'dark');
-```
-
-### 4. Follow the Component Specs
-
-The `design.md` file contains complete CSS specifications for:
-- Navigation bar (sticky, maroon, gold accents)
-- Hero search box (gold CTA button, focus states)
-- Search result cards (status badges, subject tags, actions)
-- Facet sidebar (gold-bordered group titles)
-- Live status badges (pulsing animation for available items)
-- Footer (maroon background, campus map watermark)
+1. **E-Resource Database Browser** — Visual grid of subscribed databases (IEEE, Elsevier, JSTOR, etc.) with branded icon tiles
+2. **Institutional Repository** — DSpace theses and research papers with DOIs, open-access ribbons, PDF downloads
+3. **Reference Services** — Live chat widget, question submission, consultation booking, citation tools
+4. **Federated Search** — Results from Crossref, OpenAlex, CORE with open-access badges and external links
 
 ---
 
 ## Color Palette
 
-### Primary: BUET Maroon
+| Role | Color | Hex | Usage |
+|------|-------|-----|-------|
+| **Primary** | BUET Maroon | `#8B0000` | Headings, nav, brand |
+| **Accent** | Gold Tassel | `#D4AF37` | CTAs, active states, premium badges |
+| **Digital** | Open Access Blue | `#3B82F6` | **Links, DOIs, open-access badges** |
+| **Success** | Campus Green | `#16A34A` | Subscribed access, free full-text |
+| **Neutrals** | Concrete & Paper | `#FDFCFA` → `#1A1916` | Backgrounds, text, borders |
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `--maroon-600` | `#8B0000` | **Primary brand** — headings, nav, CTAs |
-| `--maroon-700` | `#700000` | Hover states, emphasis |
-| `--maroon-800` | `#520000` | Footer, dark sections |
-| `--maroon-500` | `#B52A2A` | Primary buttons, links |
-
-### Accent: Gold Tassel
-
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `--gold-500` | `#D4AF37` | **Accent** — active nav, premium icons, CTA buttons |
-| `--gold-400` | `#FBBF24` | Hover on gold elements |
-| `--gold-600` | `#B5901F` | Darker gold, shadows |
-
-### Neutral: Concrete & Paper
-
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `--paper-50` | `#FDFCFA` | Page backgrounds (warm white) |
-| `--paper-100` | `#F8F6F3` | Section backgrounds |
-| `--paper-200` | `#F0EDE8` | Borders, dividers |
-| `--paper-700` | `#4A4742` | Body text |
-| `--paper-900` | `#1A1916` | Dark mode surfaces |
+**Key change:** Links are **blue** (`#3B82F6`) instead of maroon — this is a digital library, so links should feel like hyperlinks, not physical labels.
 
 ---
 
-## Unique Design Elements
+## Unique Design Elements (E-Library)
 
-### 1. Blueprint Grid Background
-
-Subtle engineering grid pattern on the hero section. See `design.md` §5.1 and `demo.html` hero section.
-
-### 2. Jamdani Accent Borders
-
-Gold-bordered section headers inspired by Jamdani textile weaving. See `design.md` §5.2 and facet sidebar in `demo.html`.
-
-### 3. Tassel Active Indicator
-
-Gold underline that slides in on hover/active navigation. See `design.md` §5.3.
-
-```css
-.nav-link::after {
-  width: 0; height: 2px; background: var(--gold-500);
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.nav-link:hover::after { width: 100%; }
-```
-
-### 4. Engineering Diagram Status Icons
-
-Geometric icons instead of generic checkmarks:
-
-| Status | Icon | Color |
-|--------|------|-------|
-| Available | ● dot | Green |
-| Checked Out | ─ line | Red |
-| On Hold | ⬍ vertical | Orange |
-| Digital | ◆ diamond | Blue |
-| Reference | ▲ triangle | Gold |
-
-### 5. Concrete Card Surfaces
-
-Cards lift slightly on hover with warm shadow:
-
-```css
-.result-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(26, 25, 22, 0.08);
-}
-```
+| Element | What It Is | Where Used |
+|---------|-----------|------------|
+| **Digital Wave** | Sine wave background pattern | Hero section — suggests data flow |
+| **Open Access Ribbon** | Diagonal blue ribbon badge | Repository cards, open-access content |
+| **Connection Line** | Gold-to-blue gradient underline | Nav active states — "digital connection" |
+| **Database Grid** | Branded icon tiles (IEEE blue, Elsevier orange) | Database browser homepage |
+| **Reference Pulse** | Green pulsing dot + "Librarian Online" | Sidebar widget, footer |
+| **Glass Cards** | Frosted transparency + backdrop blur | E-resource cards, premium feel |
 
 ---
 
@@ -163,103 +57,170 @@ Cards lift slightly on hover with warm shadow:
 
 | Role | Font | Usage |
 |------|------|-------|
-| Headings | Noto Serif Bengali + Noto Serif | Page titles, card headings, nav |
-| Body | Inter + Noto Sans Bengali | Body text, descriptions, metadata |
-| Monospace | JetBrains Mono | Call numbers, ISBNs, MARC tags, DOIs |
-
-**Headings:** Always serif, maroon, with slight letter-spacing tightening (`-0.01em` to `-0.02em`).
-
-**Body:** Sans-serif, warm gray (`--paper-700`), generous line height (`1.6–1.7`).
-
-**Bengali:** Minimum 15px for body text. Never bold below 18px.
+| Headings | Noto Serif Bengali + Noto Serif | Bilingual, academic authority |
+| Body | Inter + Noto Sans Bengali | Screen-optimized readability |
+| Monospace | JetBrains Mono | DOIs, URLs, MARC tags, call numbers |
 
 ---
 
-## Responsive Breakpoints
+## Components (E-Library Focused)
 
-| Name | Width | Key Changes |
-|------|-------|-------------|
-| Mobile | < 640px | Stacked nav, full-width cards, bottom sheet facets |
-| Tablet | 641–1024px | Collapsible sidebar, 2-column stats |
-| Desktop | 1025–1440px | Persistent sidebar, full grid |
-| Wide | > 1440px | Max-width container, generous whitespace |
+### 1. Database Browser (Hero)
+
+Grid of branded database tiles with access status:
+
+```
+┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐
+│IEEE│ │Else│ │JSTOR│ │SPR │ │Wiley│ │ACM │
+│ X  │ │vier│ │     │ │inger│ │     │ │    │
+└────┘ └────┘ └────┘ └────┘ └────┘ └────┘
+🟢 Subscribed    🔵 Open Access    🟢 Subscribed
+```
+
+### 2. Institutional Repository Card
+
+```
+┌────────────────────────────────────────┐
+│  🔓 Open Access Ribbon (diagonal blue) │
+│  Traffic Flow Prediction in Dhaka... │
+│  By Islam, N. | CSE, BUET | 2024     │
+│  DOI: 10.1234/buet.cse.2024.001      │
+│  [📄 Download PDF] [🔖 Save] [📤 Cite]│
+└────────────────────────────────────────┘
+```
+
+### 3. Reference Services Widget
+
+```
+┌──────────────────┐
+│  🟢 Librarian    │
+│     Online       │
+│  [Start Chat]    │
+│  ───────────────  │
+│  📧 Ask Question │
+│  📅 Book Session │
+│  📎 Citation Tools│
+└──────────────────┘
+```
+
+### 4. Federated Search Result
+
+```
+┌────────────────────────────────────────┐
+│  🌐 Crossref    [Journal Article]     │
+│  Deep Learning for Bridge Health...    │
+│  Smith, J. et al. | 2024               │
+│  DOI: 10.1177/14759217241234567      │
+│  🔓 Open Access | [Full Text] [Cite]   │
+└────────────────────────────────────────┘
+```
+
+---
+
+## Dark Mode
+
+Toggle via ☀️/🌙 button in the nav. Key dark mode changes:
+
+| Light | Dark |
+|-------|------|
+| White background → Deep slate (`#1A1916`) |
+| Maroon headings → Brighter maroon (`#D14D4D`) |
+| **Blue links → Lighter blue (`#60A5FA`)** |
+| Gold accents → Slightly brighter gold |
+| Cards → Frosted glass effect on dark background |
+
+See `demo.html` for the full interactive implementation.
+
+---
+
+## Quick Start
+
+### 1. Preview
+
+Open `demo.html` in a browser. It includes:
+- Hero with database browser grid
+- Stats + reference services widget
+- Repository cards with open-access ribbons
+- E-resource database list
+- Federated search results
+- Dark mode toggle
+- Responsive layout
+
+### 2. Use CSS Variables
+
+```css
+@import url('base.css');
+
+.my-component {
+  background: var(--maroon-600);
+  color: var(--white);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+}
+```
+
+### 3. Enable Dark Mode
+
+```html
+<html data-theme="dark">
+```
+
+Or toggle via JavaScript (see `demo.html` for the toggle implementation).
+
+---
+
+## Drupal 11 Theme Implementation
+
+### Theme Structure
+
+```
+themes/buet_elibrary/
+├── css/
+│   ├── base.css           # ← Import this file
+│   ├── e-resources.css    # Database cards, browser
+│   ├── repository.css     # DSpace item cards
+│   ├── reference.css      # Helpdesk widget, guides
+│   ├── search.css         # Federated search results
+│   └── dark-mode.css
+├── js/
+│   ├── dark-mode.js
+│   ├── federated-search.js
+│   └── reference-chat.js
+├── images/
+│   ├── buet-logo-*.svg
+│   └── db-icons/          # IEEE, Elsevier, JSTOR brand icons
+└── templates/
+    ├── node--e-resource.html.twig
+    ├── node--repository-item.html.twig
+    └── block--reference-widget.html.twig
+```
+
+### Key Modules
+
+- `search_api` + `search_api_elasticsearch` — Discovery search
+- `facets` — E-resource filtering
+- `views` — Database listings, repository browse
+- `webform` — Reference question submission
 
 ---
 
 ## Accessibility (WCAG 2.1 AA)
 
 - All body text meets 4.5:1 contrast ratio
-- Gold (`#D4AF37`) is **never** used for body text — only decorative accents and large headings
-- Focus states: `outline: 2px solid var(--maroon-500)` with `outline-offset: 2px`
+- Blue links (`#3B82F6` on white) = 4.6:1 ✅ AA
+- Gold is **never** used for body text — only decorative accents and large headings
+- Focus states: `outline: 2px solid var(--blue-500)`
 - `prefers-reduced-motion` disables all animations
-- Screen reader support: `article` landmarks, `aria-live` for status updates, `aria-current` for active nav
 
 ---
 
-## Dark Mode
+## Version History
 
-Toggle via the ☀️/🌙 button in the navigation. Preference is saved to `localStorage`.
-
-Dark mode swaps:
-- Light paper backgrounds → deep slate (`--paper-800`, `--paper-900`)
-- Maroon headings → brighter maroon (`--maroon-400`) for contrast
-- Gold accents → slightly lighter gold (`--gold-400`)
-- Text → warm off-white (`#E8E6E3`)
-
-See `design.md` §8 and `demo.html` for full implementation.
+| Version | Date | Changes |
+|---------|------|---------|
+| **2.0** | 2026-06-18 | **E-library focused redesign** — database browser, repository cards, reference widget, federated search, digital blue accent |
+| 1.0 | 2026-06-18 | Initial design system with physical-library orientation |
 
 ---
 
-## Implementation in Drupal 11
-
-### Theme Structure
-
-```
-themes/buet_elibrary/
-├── buet_elibrary.info.yml
-├── buet_elibrary.libraries.yml
-├── buet_elibrary.theme
-├── css/
-│   ├── base.css          # ← Import this file
-│   ├── layout.css
-│   ├── components.css
-│   ├── navigation.css
-│   ├── search.css
-│   ├── dark-mode.css
-│   └── print.css
-├── js/
-│   ├── dark-mode.js      # ← Copy from demo.html
-│   ├── live-status.js
-│   └── federated-search.js
-├── images/
-│   ├── buet-logo-white.svg
-│   ├── buet-logo-maroon.svg
-│   ├── jamdani-pattern.svg
-│   └── campus-map.svg
-└── templates/
-    ├── page.html.twig
-    ├── search-result.html.twig
-    └── facet-*.html.twig
-```
-
-### Key Modules to Style
-
-- `search_api` — Search results, facets, search pages
-- `search_api_elasticsearch` — Elasticsearch integration
-- `facets` — Faceted navigation blocks
-- `views` — Custom views for database listings, new arrivals
-- `better_exposed_filters` — Enhanced filter UI
-
----
-
-## References & Inspiration
-
-1. **BUET Institutional Identity** — Official seal colors (maroon + gold)
-2. **Bangladeshi Heritage** — Jamdani weaving, terracotta architecture, natural materials
-3. **Engineering Modernism** — Grid systems, blueprint aesthetics, technical precision
-4. **Contemporary Library Design** — NYPL Digital, DPLA, Europeana
-5. **Material Design 3** — Dynamic color, elevation, motion
-
----
-
-**Questions or feedback?** Open an issue in the project repository or contact the BUET E-Library development team.
+**End of README**

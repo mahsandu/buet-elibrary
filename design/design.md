@@ -1,241 +1,134 @@
 # BUET E-Library Design System — "Bishwo"
 
-**Version:** 1.0  
+**Version:** 2.0 (E-Library Focused)  
 **Date:** 2026-06-18  
-**Purpose:** Comprehensive visual design specification for the BUET Central Library e-discovery platform. Tailored to Drupal 11 custom theme implementation.
+**Purpose:** Visual design specification for the BUET E-Library — a digital-first discovery platform for e-resources, institutional repository, and reference services.
 
 ---
 
 ## 1. Design Philosophy
 
-### Bishwo (বিশ্ব) — The World of Knowledge
+### Bishwo (বিশ্ব) — The World of Digital Knowledge
 
-The design language draws from three anchors:
+This is not a physical library catalog. It is an **electronic library** — a unified digital gateway for:
 
-1. **BUET Institutional Identity** — Maroon authority, gold excellence, engineering precision
-2. **Bangladeshi Heritage** — Subtle Jamdani textile patterns, terracotta warmth, natural materials
-3. **Engineering Modernism** — Grid systems, technical line weights, blueprint-inspired details, data-driven clarity
+1. **E-Resources** — Subscribed databases (IEEE, Elsevier, JSTOR, Springer), open-access journals, e-books, standards
+2. **Institutional Repository** — DSpace theses, research papers, conference proceedings, departmental question papers
+3. **Reference Services** — Virtual helpdesk, research guides, citation tools, literature review support
+4. **Digital Discovery** — Federated search across global scholarly content, not just local shelves
 
-The result is a warm, authoritative, and distinctly Bangladeshi digital space that feels like a modern extension of the BUET campus rather than a generic SaaS template.
+The design language remains anchored in BUET identity (maroon + gold) but the **experience is entirely digital**. There are no physical shelves, no checkout counters, no floor maps — only URLs, PDFs, DOIs, metadata, and live access links.
 
 ---
 
 ## 2. Color Palette
 
-### Primary — "BUET Maroon" (Authority & Heritage)
+*(Unchanged from V1 — see `base.css` for full tokens)*
 
-Derived from the official BUET seal and logo. Used for primary navigation, headings, key actions, and brand moments.
+### Primary — "BUET Maroon" (Authority & Digital Trust)
 
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `--maroon-50` | `#FDF2F2` | Hover backgrounds, light tints |
-| `--maroon-100` | `#FADCDC` | Subtle backgrounds, badges |
-| `--maroon-200` | `#F5B5B5` | Disabled states, inactive tabs |
-| `--maroon-300` | `#E88080` | Secondary accents |
-| `--maroon-400` | `#D14D4D` | Notifications, alerts |
-| `--maroon-500` | `#B52A2A` | Primary buttons, links |
-| `--maroon-600` | `#8B0000` | **PRIMARY BRAND COLOR** — headings, nav, CTAs |
+| `--maroon-600` | `#8B0000` | **Primary** — headings, nav, CTAs, e-resource headers |
 | `--maroon-700` | `#700000` | Hover states, emphasis |
 | `--maroon-800` | `#520000` | Footer, dark sections |
-| `--maroon-900` | `#330000` | Deepest backgrounds |
+| `--maroon-500` | `#B52A2A` | Primary buttons, links |
 
-### Accent — "Gold Tassel" (Excellence & Achievement)
-
-Inspired by the gold tassel on the BUET graduation cap. Used for highlights, active states, success indicators, and premium features.
+### Accent — "Gold Tassel" (Premium Access & Excellence)
 
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `--gold-50` | `#FFFBEB` | Light backgrounds, tips |
-| `--gold-100` | `#FEF3C7` | Highlighted text bg |
-| `--gold-200` | `#FDE68A` | Stars, ratings, badges |
-| `--gold-300` | `#FCD34D` | Active tab indicators |
+| `--gold-500` | `#D4AF37` | **Accent** — active nav, premium e-resource badges, reference service icons |
 | `--gold-400` | `#FBBF24` | Hover on gold elements |
-| `--gold-500` | `#D4AF37` | **ACCENT BRAND COLOR** — active nav, premium icons |
 | `--gold-600` | `#B5901F` | Darker gold, shadows |
-| `--gold-700` | `#8C6D14` | Text on gold backgrounds |
-| `--gold-800` | `#5C4710` | Dark mode gold |
-| `--gold-900` | `#332607` | Deepest gold |
 
-### Secondary — "Campus Green" (Growth & Sustainability)
+### Secondary — "Digital Blue" (Links & Open Access)
 
-A nod to the greenery of the BUET campus and Bangladesh's natural landscape. Used for success states, environmental/e-sustainability content, and secondary actions.
+Replaces "Campus Green" as the secondary digital accent. Used for open-access indicators, external links, and digital format badges.
 
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `--green-50` | `#F0FDF4` | Success backgrounds |
-| `--green-100` | `#DCFCE7` | Available status badges |
-| `--green-500` | `#16A34A` | **Available — physical book** |
-| `--green-700` | `#15803D` | Success text |
-| `--green-900` | `#14532D` | Dark mode success |
+| `--blue-50` | `#EFF6FF` | Open access backgrounds |
+| `--blue-100` | `#DBEAFE` | Digital format badges |
+| `--blue-500` | `#3B82F6` | **External links, DOIs, open access** |
+| `--blue-700` | `#1D4ED8` | Digital text emphasis |
+| `--blue-900` | `#1E3A8A` | Dark mode links |
 
-### Neutral — "Concrete & Paper" (Foundation & Readability)
-
-Inspired by the concrete brutalism of the BUET architecture and the paper of traditional library card catalogs.
+### Semantic Colors (Digital-First)
 
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `--white` | `#FFFFFF` | Card backgrounds, primary surfaces |
-| `--paper-50` | `#FDFCFA` | Page backgrounds (warm white) |
-| `--paper-100` | `#F8F6F3` | Section backgrounds, alternating rows |
-| `--paper-200` | `#F0EDE8` | Borders, dividers, disabled fields |
-| `--paper-300` | `#E3DFD8` | Borders, separators |
-| `--paper-400` | `#C4BFB5` | Placeholder text, icons |
-| `--paper-500` | `#9A958C` | Secondary text, captions |
-| `--paper-600` | `#6B675F` | Body text, descriptions |
-| `--paper-700` | `#4A4742` | Sub-headings, strong body |
-| `--paper-800` | `#2E2C28` | Headings, primary text |
-| `--paper-900` | `#1A1916` | Deepest text, dark mode surfaces |
-
-### Semantic Colors
-
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `--info` | `#2563EB` | Informational alerts, blue links |
-| `--warning` | `#D97706` | Warning states, due dates |
-| `--danger` | `#DC2626` | Checked out, overdue, errors |
-| `--success` | `#16A34A` | Available, confirmed, checked in |
-
-### Dark Mode Palette
-
-When the system is in dark mode, the paper tones invert to deep slate, and maroon becomes the dominant surface color:
-
-| Light Mode | Dark Mode Equivalent |
-|------------|---------------------|
-| `--paper-50` | `--paper-900` |
-| `--paper-100` | `--paper-800` |
-| `--paper-200` | `--paper-700` |
-| `--white` | `--paper-900` |
-| `--maroon-600` | `--maroon-400` (brighter for contrast) |
-| `--gold-500` | `--gold-400` |
-| Text on light | `#E8E6E3` (warm off-white) |
+| `--info` | `#2563EB` | Database info, institutional links |
+| `--warning` | `#D97706` | Subscription expiry, access warnings |
+| `--danger` | `#DC2626` | Access denied, broken links, paywalls |
+| `--success` | `#16A34A` | Open access, free full-text, institutional access |
+| `--premium` | `#D4AF37` | Subscribed databases, premium e-resources |
 
 ---
 
 ## 3. Typography
 
-### Font Stack
+*(Unchanged from V1 — see `base.css` for full tokens)*
 
 **Primary (Headings):** `"Noto Serif Bengali", "Noto Serif", "Georgia", serif`  
-*Why:* Serif conveys authority and heritage. Noto Serif Bengali ensures beautiful Bangla text rendering for bilingual content.
-
 **Secondary (Body):** `"Inter", "Noto Sans Bengali", "Helvetica Neue", sans-serif`  
-*Why:* Inter is highly legible at small sizes, engineered for screens. Noto Sans Bengali provides clean Bangla body text.
-
-**Monospace (Code, MARC, Call Numbers):** `"JetBrains Mono", "Fira Code", "Courier New", monospace`  
-*Why:* Used for call numbers, ISBNs, MARC tags, and any technical data. JetBrains Mono has excellent Bengali support.
-
-### Type Scale
-
-Inspired by the golden ratio (1.618) for a harmonious, academic feel.
-
-| Token | Size | Weight | Line Height | Letter Spacing | Usage |
-|-------|------|--------|-------------|----------------|-------|
-| `--text-hero` | 48px / 3rem | 700 | 1.1 | -0.02em | Hero title, homepage headline |
-| `--text-h1` | 36px / 2.25rem | 700 | 1.2 | -0.01em | Page titles, section headers |
-| `--text-h2` | 28px / 1.75rem | 600 | 1.3 | -0.01em | Card titles, result headings |
-| `--text-h3` | 22px / 1.375rem | 600 | 1.4 | 0 | Sub-sections, facet headers |
-| `--text-h4` | 18px / 1.125rem | 600 | 1.5 | 0 | Widget titles, sidebar headers |
-| `--text-body-lg` | 17px / 1.0625rem | 400 | 1.7 | 0 | Lead paragraphs, abstracts |
-| `--text-body` | 15px / 0.9375rem | 400 | 1.6 | 0.01em | Standard body text |
-| `--text-body-sm` | 13px / 0.8125rem | 400 | 1.5 | 0.02em | Metadata, captions, labels |
-| `--text-caption` | 11px / 0.6875rem | 500 | 1.4 | 0.04em | Timestamps, tags, footers |
-| `--text-button` | 14px / 0.875rem | 600 | 1 | 0.02em | Buttons, navigation links |
-
-### Typography Rules
-
-- **Headings:** Always `--maroon-700` or `--maroon-800` on light backgrounds. `--gold-400` on dark backgrounds.
-- **Body text:** `--paper-700` on light, `#E8E6E3` on dark.
-- **Links:** `--maroon-600` with underline on hover. Transition: `color 0.2s ease`.
-- **Bengali text:** Always minimum `--text-body` (15px) for readability. Never bold below `--text-h4`.
-- **Monospace:** Always `--paper-600` or `#8A857C`. Used for call numbers, ISBNs, DOIs, status codes.
+**Monospace (DOIs, URLs, MARC):** `"JetBrains Mono", "Fira Code", "Courier New", monospace`
 
 ---
 
 ## 4. Layout & Grid
 
-### Grid System
+*(Unchanged from V1 — see `base.css` for full tokens)*
 
-Inspired by engineering blueprints — a 12-column grid with a 24px gutter. The page is constrained to a max-width of 1440px, centered.
-
-```
-┌────────────────────────────────────────────────────────────┐
-│  Margin: 24px (mobile) → 48px (tablet) → 80px (desktop)   │
-│                                                            │
-│  ┌─────────────────────────────────────────────────────┐  │
-│  │  Content Area (max 1440px)                          │  │
-│  │  ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐│  │
-│  │  │ 1   │ 2   │ 3   │ 4   │ 5   │ 6   │ 7   │ 8   ││  │
-│  │  │     │     │     │     │     │     │     │     ││  │
-│  │  └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘│  │
-│  └─────────────────────────────────────────────────────┘  │
-│                                                            │
-└────────────────────────────────────────────────────────────┘
-```
-
-### Breakpoints
-
-| Name | Width | Usage |
-|------|-------|-------|
-| `--bp-mobile` | 0–640px | Single column, stacked nav, full-width cards |
-| `--bp-tablet` | 641–1024px | 2-column grid, hamburger menu, larger touch targets |
-| `--bp-desktop` | 1025–1440px | Full layout, 3-column results, sidebar visible |
-| `--bp-wide` | 1441px+ | Max-width container, generous whitespace |
-
-### Spacing Scale
-
-Based on an 8px grid system (common in engineering design), but with warm, irregular spacing for a more organic feel.
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--space-1` | 4px | Icon padding, tight inline spacing |
-| `--space-2` | 8px | Small gaps, button padding (vertical) |
-| `--space-3` | 12px | Card internal padding, list item gaps |
-| `--space-4` | 16px | Standard component padding |
-| `--space-5` | 24px | Section padding, card gaps |
-| `--space-6` | 32px | Larger component gaps |
-| `--space-7` | 48px | Section separation |
-| `--space-8` | 64px | Major section breaks |
-| `--space-9` | 96px | Hero spacing, footer padding |
-| `--space-10` | 128px | Page-level vertical rhythm |
+12-column grid, 24px gutter, max-width 1440px.
 
 ---
 
-## 5. Unique Design Elements (BUET-Specific)
+## 5. Unique Design Elements (E-Library Specific)
 
-### 5.1 The "Blueprint Grid" Background Pattern
+### 5.1 The "Digital Wave" Background Pattern
 
-A subtle, repeating geometric grid pattern inspired by engineering blueprints and graph paper. Used on the homepage hero and search results background.
+A subtle, flowing wave pattern inspired by digital signal waveforms and data streams. Replaces the physical blueprint grid. Used on the homepage hero and e-resource discovery pages.
 
 ```css
-.blueprint-grid {
+.digital-wave {
   background-color: var(--paper-50);
-  background-image: 
-    linear-gradient(var(--paper-200) 1px, transparent 1px),
-    linear-gradient(90deg, var(--paper-200) 1px, transparent 1px);
-  background-size: 40px 40px;
-  background-position: -1px -1px;
+  background-image: url('patterns/digital-wave.svg');
+  background-repeat: repeat-x;
+  background-position: bottom;
+  background-size: 120px 60px;
+  opacity: 0.15;
 }
 ```
 
-*Dark mode variant:* Lines become `--maroon-800` at 30% opacity on `--paper-900`.
+**SVG Pattern:** A gentle sine wave in `--maroon-600` at 10% opacity. Suggests data flow, connectivity, and digital transmission — not physical structures.
 
-### 5.2 The "Jamdani Accent" Border Motif
+### 5.2 The "Open Access" Ribbon Badge
 
-A decorative corner or edge motif inspired by Jamdani textile weaving patterns. Used sparingly on featured cards, section dividers, and the homepage hero.
+A diagonal ribbon badge for open-access content. Used on e-resource cards, journal articles, and repository items.
 
 ```css
-.jamdani-border {
-  border-image: url('patterns/jamdani-corner.svg') 30% stretch;
-  border-width: 2px;
-  border-style: solid;
+.oa-ribbon {
+  position: absolute;
+  top: 12px;
+  right: -32px;
+  width: 120px;
+  padding: 4px 0;
+  background: var(--blue-500);
+  color: var(--white);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 ```
 
-**SVG Pattern:** A simple repeating geometric motif (diamonds and lines) in `--gold-500` at 20% opacity. Never overpowering — purely decorative.
+### 5.3 The "Connection Line" Active Indicator
 
-### 5.3 The "Tassel" Active Indicator
-
-A gold horizontal line (2px, `--gold-500`) that slides under active navigation items or selected tabs. On hover, the line grows from 0% to 100% width with a `cubic-bezier(0.4, 0, 0.2, 1)` ease.
+A horizontal line that connects the active navigation item to the content area below, suggesting a "live connection" to digital resources. Replaces the physical "tassel" indicator.
 
 ```css
 .nav-link::after {
@@ -245,7 +138,7 @@ A gold horizontal line (2px, `--gold-500`) that slides under active navigation i
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--gold-500);
+  background: linear-gradient(90deg, var(--gold-500), var(--blue-500));
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .nav-link:hover::after,
@@ -254,347 +147,72 @@ A gold horizontal line (2px, `--gold-500`) that slides under active navigation i
 }
 ```
 
-### 5.4 "Concrete" Card Surface
+### 5.4 "Glass" Resource Cards
 
-Search result cards and content blocks use a subtle texture reminiscent of concrete or handmade paper.
+E-resource cards use a subtle glassmorphism effect — frosted transparency over a gradient background — suggesting digital interfaces and premium access.
 
 ```css
-.concrete-card {
-  background: var(--white);
-  border: 1px solid var(--paper-200);
-  border-radius: 4px;
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
   box-shadow: 
-    0 1px 2px rgba(26, 25, 22, 0.04),
-    0 2px 4px rgba(26, 25, 22, 0.02);
+    0 4px 6px rgba(0, 0, 0, 0.04),
+    0 1px 3px rgba(0, 0, 0, 0.02);
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
-.concrete-card:hover {
+.glass-card:hover {
   box-shadow: 
-    0 4px 8px rgba(26, 25, 22, 0.08),
-    0 8px 16px rgba(26, 25, 22, 0.04);
-  transform: translateY(-2px);
+    0 12px 24px rgba(0, 0, 0, 0.08),
+    0 4px 8px rgba(0, 0, 0, 0.04);
+  transform: translateY(-3px);
+}
+[data-theme="dark"] .glass-card {
+  background: rgba(42, 40, 36, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 ```
 
-*Dark mode:* Background becomes `--paper-800`, border `--paper-700`, text `#E8E6E3`.
+### 5.5 "Database Grid" Icon System
 
-### 5.5 "Engineering Diagram" Status Icons
-
-Status indicators (Available, Checked Out, On Hold) use geometric, blueprint-inspired icons rather than generic checkmarks.
-
-| Status | Icon Style | Color |
-|--------|-----------|-------|
-| **Available** | Hollow circle with a dot inside (●) | `--green-500` |
-| **Checked Out** | Horizontal line (─) | `--danger` |
-| **On Hold** | Vertical line with dot (⬍) | `--warning` |
-| **Digital** | Diamond shape (◆) | `--info` |
-| **Reference** | Triangle pointing up (▲) | `--gold-500` |
-
-### 5.6 The "Campus Map" Footer
-
-A stylized, simplified topographic map of the BUET campus in the footer background. Used as a subtle, decorative watermark at 5% opacity.
-
----
-
-## 6. Component Design
-
-### 6.1 Search Box (Hero)
-
-The centerpiece of the homepage. A large, inviting search input with a prominent gold-accented button.
-
-```
-┌────────────────────────────────────────────────────────────┐
-│                                                            │
-│   [BUET Logo]        BUET Central Library                  │
-│                      বিশ্বজ্ঞানের সন্ধানে                   │
-│                      "In Quest of Knowledge"                │
-│                                                            │
-│   ┌──────────────────────────────────────────┬──────────┐ │
-│   │  🔍  Search books, theses, articles...   │  SEARCH  │ │
-│   │                                          │  [Gold]  │ │
-│   └──────────────────────────────────────────┴──────────┘ │
-│                                                            │
-│   [Physical Books]  [Digital Theses]  [Journal Articles]   │
-│                                                            │
-└────────────────────────────────────────────────────────────┘
-```
-
-**CSS:**
-```css
-.hero-search {
-  display: flex;
-  max-width: 800px;
-  margin: 0 auto;
-  border: 2px solid var(--paper-300);
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--white);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-.hero-search:focus-within {
-  border-color: var(--maroon-500);
-  box-shadow: 0 0 0 4px rgba(139, 0, 0, 0.08);
-}
-.hero-search input {
-  flex: 1;
-  padding: 16px 20px;
-  border: none;
-  font-family: var(--font-secondary);
-  font-size: var(--text-body-lg);
-  color: var(--paper-800);
-  background: transparent;
-}
-.hero-search input::placeholder {
-  color: var(--paper-400);
-}
-.hero-search button {
-  padding: 16px 32px;
-  background: var(--gold-500);
-  color: var(--paper-900);
-  font-weight: 600;
-  font-size: var(--text-button);
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-.hero-search button:hover {
-  background: var(--gold-600);
-}
-```
-
-### 6.2 Search Result Card
-
-A clean, information-dense card for search results combining local and federated content.
-
-```
-┌────────────────────────────────────────────────────────────┐
-│  ● Available                           [Physical Book]     │
-│  Central Library Floor 2                                     │
-│                                                            │
-│  Machine Learning for Civil Engineering: A Comprehensive     │
-│  Guide to Structural Health Monitoring                     │
-│  By Rahman, A.K.M. | Karim, S. | BUET Press, 2024         │
-│                                                            │
-│  📚 Civil Engineering  |  🔬 Machine Learning  |  📄 PDF   │
-│  ISBN: 978-984-12345-6-7  |  Call No: TA 170 .R35 2024    │
-│                                                            │
-│  [📖 View in Koha]  [📄 Download PDF]  [🔖 Save]  [📤 Cite] │
-│                                                            │
-│  ─── Live Status ──────────────────────────────────────── │
-│  Shelf: Central Library Floor 2  |  Status: Available    │
-│  ───────────────────────────────────────────────────────  │
-└────────────────────────────────────────────────────────────┘
-```
-
-**CSS:**
-```css
-.result-card {
-  background: var(--white);
-  border: 1px solid var(--paper-200);
-  border-radius: 4px;
-  padding: var(--space-5);
-  margin-bottom: var(--space-4);
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-  position: relative;
-}
-.result-card:hover {
-  box-shadow: 0 4px 12px rgba(26, 25, 22, 0.08);
-  transform: translateY(-1px);
-}
-.result-card .status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: var(--text-body-sm);
-  font-weight: 600;
-  color: var(--green-700);
-}
-.result-card .status-badge .status-icon {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--green-500);
-}
-.result-card .format-badge {
-  float: right;
-  font-size: var(--text-caption);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--paper-500);
-  background: var(--paper-100);
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-.result-card .title {
-  font-family: var(--font-primary);
-  font-size: var(--text-h3);
-  font-weight: 600;
-  color: var(--maroon-700);
-  line-height: 1.4;
-  margin: var(--space-2) 0;
-}
-.result-card .title a:hover {
-  color: var(--maroon-500);
-  text-decoration: underline;
-}
-.result-card .meta {
-  font-size: var(--text-body-sm);
-  color: var(--paper-600);
-  margin-bottom: var(--space-3);
-}
-.result-card .subject-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-bottom: var(--space-3);
-}
-.result-card .subject-tag {
-  font-size: var(--text-body-sm);
-  color: var(--maroon-700);
-  background: var(--maroon-50);
-  padding: 2px 8px;
-  border-radius: 4px;
-  border: 1px solid var(--maroon-100);
-}
-.result-card .actions {
-  display: flex;
-  gap: var(--space-3);
-  margin-top: var(--space-3);
-  padding-top: var(--space-3);
-  border-top: 1px solid var(--paper-200);
-}
-.result-card .action-btn {
-  font-size: var(--text-body-sm);
-  color: var(--maroon-600);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px 0;
-  transition: color 0.2s ease;
-}
-.result-card .action-btn:hover {
-  color: var(--maroon-800);
-  text-decoration: underline;
-}
-```
-
-### 6.3 Facet Sidebar
-
-A vertical sidebar for filtering search results by format, subject, date, and source.
-
-```
-┌──────────────────┐
-│  Filter Results  │
-│  ═══════════════  │
-│                  │
-│  Format          │
-│  ○ All (1,234)   │
-│  ● Physical (892)│
-│  ○ Digital (342) │
-│                  │
-│  Subject         │
-│  ○ All           │
-│  ● Civil Eng (45)│
-│  ○ CSE (120)     │
-│  ○ EEE (89)      │
-│  ○ Mech (67)     │
-│  [+ Show More]   │
-│                  │
-│  Date            │
-│  [2024]========> │
-│  1900 — 2024     │
-│                  │
-│  Source          │
-│  ○ All           │
-│  ● Koha (892)    │
-│  ○ DSpace (342)  │
-│  ○ Crossref (45) │
-│  ○ OpenAlex (67) │
-│                  │
-└──────────────────┘
-```
-
-**CSS:**
-```css
-.facet-sidebar {
-  background: var(--white);
-  border: 1px solid var(--paper-200);
-  border-radius: 4px;
-  padding: var(--space-5);
-}
-.facet-group {
-  margin-bottom: var(--space-5);
-}
-.facet-group-title {
-  font-family: var(--font-primary);
-  font-size: var(--text-h4);
-  font-weight: 600;
-  color: var(--maroon-800);
-  margin-bottom: var(--space-3);
-  padding-bottom: var(--space-2);
-  border-bottom: 2px solid var(--gold-500);
-}
-.facet-option {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-1) 0;
-  font-size: var(--text-body-sm);
-  color: var(--paper-700);
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-.facet-option:hover {
-  color: var(--maroon-600);
-}
-.facet-option input[type="radio"],
-.facet-option input[type="checkbox"] {
-  accent-color: var(--maroon-600);
-}
-.facet-count {
-  font-size: var(--text-caption);
-  color: var(--paper-500);
-  margin-left: auto;
-}
-```
-
-### 6.4 Live Status Badge
-
-Dynamic status indicator for physical books with real-time availability.
+Each e-resource database has a branded icon tile — a solid-color square with the database initials in white, using the database's brand color (e.g., IEEE = blue, Elsevier = orange, JSTOR = purple). This creates a visual "app grid" feel for the database browser.
 
 ```css
-.live-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: var(--text-body-sm);
-  font-weight: 600;
-  background: var(--paper-100);
-  border: 1px solid var(--paper-200);
+.db-tile {
+  width: 80px; height: 80px;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-primary); font-size: 24px; font-weight: 700;
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.live-status.available {
-  background: var(--green-50);
-  border-color: var(--green-500);
-  color: var(--green-700);
+.db-tile.ieee { background: #00629B; }
+.db-tile.elsevier { background: #E9711C; }
+.db-tile.jstor { background: #5F4B8B; }
+.db-tile.springer { background: #E07800; }
+.db-tile.wiley { background: #005A84; }
+.db-tile.acm { background: #1D4C7C; }
+.db-tile:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
 }
-.live-status.checked-out {
-  background: rgba(220, 38, 38, 0.05);
-  border-color: var(--danger);
-  color: var(--danger);
+```
+
+### 5.6 The "Reference Pulse" Widget
+
+A live widget showing the reference helpdesk status. A pulsing green dot indicates a librarian is available for live chat. Used in the sidebar and footer.
+
+```css
+.reference-pulse {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px; border-radius: var(--radius-full);
+  background: var(--green-50); border: 1px solid var(--green-500);
+  font-size: var(--text-body-sm); font-weight: 600; color: var(--green-700);
 }
-.live-status.on-hold {
-  background: rgba(217, 119, 6, 0.05);
-  border-color: var(--warning);
-  color: var(--warning);
-}
-.status-pulse {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: currentColor;
+.reference-pulse .pulse-dot {
+  width: 10px; height: 10px; border-radius: 50%; background: var(--green-500);
   animation: pulse 2s ease-in-out infinite;
 }
 @keyframes pulse {
@@ -603,120 +221,374 @@ Dynamic status indicator for physical books with real-time availability.
 }
 ```
 
-### 6.5 Navigation Bar
+---
 
-A sticky, maroon navigation bar with gold accents.
+## 6. Component Design (E-Library Focused)
+
+### 6.1 E-Resource Discovery Hero
+
+The homepage hero is a **database discovery interface** — not just a search box. Users can browse databases by subject, type, or search across all e-resources.
+
+```
+┌────────────────────────────────────────────────────────────┐
+│                                                            │
+│   [BUET Logo]        BUET E-Library                        │
+│                      বিশ্বজ্ঞানের ডিজিটাল প্রবেশদ্বার       │
+│                      Digital Gateway to Knowledge          │
+│                                                            │
+│   ┌──────────────────────────────────────────┬──────────┐ │
+│   │  🔍  Search e-resources, theses, articles...│ SEARCH │ │
+│   │                                          │  [Gold]  │ │
+│   └──────────────────────────────────────────┴──────────┘ │
+│                                                            │
+│   Browse Databases:                                        │
+│   ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐              │
+│   │IEEE│ │Else│ │JSTOR│ │SPR │ │Wiley│ │ACM │              │
+│   │ X  │ │vier│ │     │ │inger│ │     │ │    │              │
+│   └────┘ └────┘ └────┘ └────┘ └────┘ └────┘              │
+│                                                            │
+│   [All E-Resources] [Institutional Repository] [Reference] │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+```
+
+**CSS:**
+```css
+.hero-databases {
+  display: flex; justify-content: center; gap: var(--space-4);
+  margin-top: var(--space-6); flex-wrap: wrap;
+}
+```
+
+### 6.2 E-Resource Database Card
+
+A card for browsing subscribed databases. Shows database branding, access type, and subject coverage.
+
+```
+┌────────────────────────────────────────┐
+│  ┌────┐                                │
+│  │IEEE│  IEEE Xplore Digital Library   │
+│  │ X  │  ───────────────────────────   │
+│  └────┘  Engineering, CS, Electronics │
+│          🟢 Subscribed | Full Access   │
+│          [Launch Database →]            │
+│                                        │
+│  ┌────┐                                │
+│  │Else│  Elsevier ScienceDirect        │
+│  │vier│  ───────────────────────────   │
+│  └────┘  Engineering, Applied Sciences│
+│          🟢 Subscribed | Full Access   │
+│          [Launch Database →]            │
+│                                        │
+│  ┌────┐                                │
+│  │JSTOR│  JSTOR Digital Library        │
+│  │     │  ───────────────────────────   │
+│  └────┘  Arts, Humanities, Social Sci  │
+│          🟡 Open Access + Subscribed   │
+│          [Launch Database →]            │
+│                                        │
+└────────────────────────────────────────┘
+```
+
+**CSS:**
+```css
+.db-card {
+  display: flex; align-items: flex-start; gap: var(--space-4);
+  padding: var(--space-5); background: var(--glass-card-bg);
+  border: 1px solid var(--paper-200); border-radius: 12px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.db-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+.db-card .db-info { flex: 1; }
+.db-card .db-title {
+  font-family: var(--font-primary); font-size: var(--text-h3);
+  font-weight: 600; color: var(--maroon-700); margin-bottom: var(--space-1);
+}
+.db-card .db-subjects {
+  font-size: var(--text-body-sm); color: var(--paper-600); margin-bottom: var(--space-2);
+}
+.db-card .db-access {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: var(--text-body-sm); font-weight: 600;
+}
+.db-card .db-access.subscribed { color: var(--green-700); }
+.db-card .db-access.open-access { color: var(--blue-700); }
+.db-card .db-access.mixed { color: var(--warning); }
+.db-card .launch-btn {
+  margin-top: var(--space-3);
+  padding: 8px 20px; background: var(--maroon-600); color: var(--white);
+  font-size: var(--text-button); font-weight: 600; border: none;
+  border-radius: var(--radius-md); cursor: pointer;
+  transition: background 0.2s ease;
+}
+.db-card .launch-btn:hover { background: var(--maroon-700); }
+```
+
+### 6.3 Institutional Repository Item Card
+
+A card for DSpace theses, research papers, and departmental question papers. Emphasizes the institutional origin and digital access.
+
+```
+┌────────────────────────────────────────────────────────────┐
+│  [Open Access Ribbon]                                      │
+│                                                            │
+│  Traffic Flow Prediction in Dhaka Using Deep Learning      │
+│  ──────────────────────────────────────────────────────── │
+│  By Islam, N. | Department of CSE, BUET | 2024            │
+│  Thesis — M.Sc. in Computer Science                        │
+│                                                            │
+│  📄 PDF Available  |  🔬 Deep Learning  |  🚗 Transport    │
+│  DOI: 10.1234/buet.cse.2024.001                            │
+│                                                            │
+│  [📄 Download PDF]  [🔖 Save to My Research]  [📤 Cite]  │
+│  [📊 View in DSpace]                                       │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+```
+
+**CSS:**
+```css
+.repo-card {
+  position: relative; background: var(--card-bg);
+  border: 1px solid var(--card-border); border-radius: var(--radius-md);
+  padding: var(--space-5); margin-bottom: var(--space-4);
+  overflow: hidden; /* for ribbon */
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.repo-card:hover {
+  box-shadow: var(--shadow-md); transform: translateY(-1px);
+}
+.repo-card .repo-type {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: var(--text-caption); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--paper-500); margin-bottom: var(--space-2);
+}
+.repo-card .repo-title {
+  font-family: var(--font-primary); font-size: var(--text-h3);
+  font-weight: 600; color: var(--maroon-700); line-height: 1.4;
+  margin-bottom: var(--space-2);
+}
+.repo-card .repo-meta {
+  font-size: var(--text-body-sm); color: var(--paper-600); margin-bottom: var(--space-3);
+}
+.repo-card .repo-doi {
+  font-family: var(--font-mono); font-size: var(--text-body-sm);
+  color: var(--blue-500); margin-bottom: var(--space-3);
+}
+.repo-card .repo-doi a:hover { text-decoration: underline; }
+.repo-card .repo-actions {
+  display: flex; gap: var(--space-3); margin-top: var(--space-3);
+  padding-top: var(--space-3); border-top: 1px solid var(--paper-200);
+}
+```
+
+### 6.4 Reference Service Widget
+
+A floating or sidebar widget for accessing reference services — live chat, submit a question, schedule a consultation.
+
+```
+┌──────────────────┐
+│  Reference Desk  │
+│  ═══════════════  │
+│                  │
+│  🟢 Live Chat    │
+│  Librarian Online │
+│  [Start Chat]    │
+│                  │
+│  ───────────────  │
+│  Submit Question │
+│  [Ask a Question] │
+│                  │
+│  ───────────────  │
+│  Schedule        │
+│  Consultation    │
+│  [Book Session]  │
+│                  │
+│  ───────────────  │
+│  Citation Tools  │
+│  [BibTeX] [RIS]  │
+│  [Zotero Export] │
+│                  │
+└──────────────────┘
+```
+
+**CSS:**
+```css
+.reference-widget {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg); padding: var(--space-5);
+  position: sticky; top: 80px;
+}
+.reference-widget-title {
+  font-family: var(--font-primary); font-size: var(--text-h4);
+  font-weight: 600; color: var(--maroon-800); margin-bottom: var(--space-4);
+  padding-bottom: var(--space-2); border-bottom: 2px solid var(--gold-500);
+}
+.reference-option {
+  padding: var(--space-3) 0; border-bottom: 1px solid var(--paper-200);
+}
+.reference-option:last-child { border-bottom: none; }
+.reference-option-title {
+  font-size: var(--text-body); font-weight: 600; color: var(--text-primary);
+  margin-bottom: var(--space-1);
+}
+.reference-option-desc {
+  font-size: var(--text-body-sm); color: var(--paper-500); margin-bottom: var(--space-2);
+}
+.reference-btn {
+  display: inline-block; padding: 6px 16px;
+  background: var(--maroon-600); color: var(--white);
+  font-size: var(--text-button); font-weight: 600; border: none;
+  border-radius: var(--radius-md); cursor: pointer;
+  transition: background 0.2s ease;
+}
+.reference-btn:hover { background: var(--maroon-700); }
+.reference-btn.secondary {
+  background: transparent; color: var(--maroon-600);
+  border: 1px solid var(--maroon-200);
+}
+.reference-btn.secondary:hover { background: var(--maroon-50); }
+```
+
+### 6.5 Federated Search Result Card
+
+A card for results from external APIs (Crossref, OpenAlex, CORE). Emphasizes open access and source credibility.
+
+```
+┌────────────────────────────────────────────────────────────┐
+│  🌐 Crossref          [Journal Article]    [Open Access] │
+│                                                            │
+│  Deep Reinforcement Learning for Bridge Health Monitoring  │
+│  Smith, J., Rahman, A.K.M., Karim, S.                    │
+│  Structural Health Monitoring, Vol. 23, 2024               │
+│  DOI: 10.1177/14759217241234567                          │
+│                                                            │
+│  🔓 Free Full Text  |  📄 PDF  |  🔖 Save  |  📤 Cite     │
+│                                                            │
+│  Abstract: This paper presents a novel approach...        │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+```
+
+**CSS:**
+```css
+.federated-card {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius-md); padding: var(--space-5); margin-bottom: var(--space-4);
+  border-left: 4px solid var(--blue-500); /* Open access indicator */
+  transition: box-shadow 0.2s ease;
+}
+.federated-card:hover { box-shadow: var(--shadow-md); }
+.federated-card .source-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: var(--space-2);
+}
+.federated-card .source-name {
+  font-size: var(--text-caption); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.05em; color: var(--paper-500);
+}
+.federated-card .oa-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; background: var(--blue-50); color: var(--blue-700);
+  font-size: var(--text-caption); font-weight: 600;
+  border-radius: var(--radius-sm); border: 1px solid var(--blue-100);
+}
+.federated-card .federated-title {
+  font-family: var(--font-primary); font-size: var(--text-h3);
+  font-weight: 600; color: var(--maroon-700); line-height: 1.4; margin-bottom: var(--space-2);
+}
+.federated-card .federated-authors {
+  font-size: var(--text-body-sm); color: var(--paper-600); margin-bottom: var(--space-1);
+}
+.federated-card .federated-venue {
+  font-size: var(--text-body-sm); color: var(--paper-500); margin-bottom: var(--space-2);
+}
+.federated-card .federated-doi {
+  font-family: var(--font-mono); font-size: var(--text-body-sm); color: var(--blue-500);
+  margin-bottom: var(--space-3);
+}
+```
+
+### 6.6 Navigation Bar (E-Library Focused)
 
 ```css
 .main-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  position: sticky; top: 0; z-index: 100;
   background: var(--maroon-700);
   border-bottom: 3px solid var(--gold-500);
   padding: 0 var(--space-5);
 }
-.main-nav .nav-container {
-  max-width: 1440px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 64px;
-}
-.main-nav .logo {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  color: var(--white);
-  font-family: var(--font-primary);
-  font-size: var(--text-h4);
-  font-weight: 700;
-  text-decoration: none;
-}
-.main-nav .logo img {
-  height: 40px;
-}
 .main-nav .nav-links {
-  display: flex;
-  gap: var(--space-6);
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  display: flex; gap: var(--space-6); list-style: none;
 }
 .main-nav .nav-link {
-  position: relative;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: var(--text-button);
-  font-weight: 500;
-  text-decoration: none;
-  padding: 8px 0;
-  transition: color 0.2s ease;
+  position: relative; color: rgba(255,255,255,0.85);
+  font-size: var(--text-button); font-weight: 500;
+  text-decoration: none; padding: 8px 0; transition: color 0.2s ease;
 }
-.main-nav .nav-link:hover,
-.main-nav .nav-link.active {
-  color: var(--white);
-}
+.main-nav .nav-link:hover, .main-nav .nav-link.active { color: var(--white); }
 .main-nav .nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--gold-500);
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--gold-500), var(--blue-500));
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.main-nav .nav-link:hover::after,
-.main-nav .nav-link.active::after {
-  width: 100%;
-}
+.main-nav .nav-link:hover::after, .main-nav .nav-link.active::after { width: 100%; }
 ```
 
 ---
 
-## 7. Page Layouts
+## 7. Page Layouts (E-Library Focused)
 
-### 7.1 Homepage
+### 7.1 Homepage — E-Resource Discovery
 
 ```
 ┌────────────────────────────────────────────────────────────┐
-│  [Sticky Nav] BUET Logo | Home | Search | Databases | ... │
+│  [Sticky Nav] BUET Logo | E-Resources | Repository | Ref │
 ├────────────────────────────────────────────────────────────┤
 │                                                            │
 │  ┌────────────────────────────────────────────────────┐   │
 │  │                                                    │   │
-│  │     BUET Central Library                           │   │
-│  │     বিশ্বজ্ঞানের সন্ধানে                            │   │
-│  │     In Quest of Knowledge                          │   │
+│  │     BUET E-Library                                 │   │
+│  │     বিশ্বজ্ঞানের ডিজিটাল প্রবেশদ্বার                    │   │
+│  │     Digital Gateway to Knowledge                   │   │
 │  │                                                    │   │
 │  │  ┌────────────────────────────────┬───────────┐   │   │
-│  │  │  🔍 Search...                  │  SEARCH   │   │   │
+│  │  │  🔍 Search e-resources...      │  SEARCH   │   │   │
 │  │  └────────────────────────────────┴───────────┘   │   │
 │  │                                                    │   │
-│  │  [Physical Books] [Digital Theses] [Articles]     │   │
+│  │  Browse Databases:                                 │   │
+│  │  ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐      │   │
+│  │  │IEEE│ │Else│ │JSTOR│ │SPR │ │Wiley│ │ACM │      │   │
+│  │  └────┘ └────┘ └────┘ └────┘ └────┘ └────┘      │   │
 │  │                                                    │   │
+│  └────────────────────────────────────────────────────┘   │
+│                                                            │
+│  ┌────────────────────────────────────────────────────┐   │
+│  │  Browse by Subject                                  │   │
+│  │  [Civil] [CSE] [EEE] [Mech] [Arch] [Chem] [Math]   │   │
 │  └────────────────────────────────────────────────────┘   │
 │                                                            │
 │  ┌─────────────────┐  ┌─────────────────┐               │
-│  │  Quick Stats    │  │  Featured        │               │
+│  │  Quick Stats    │  │  Reference       │               │
 │  │  ────────────   │  │  ────────────    │               │
-│  │  📚 45,000+     │  │  New Arrivals    │               │
-│  │  💻 12,000+     │  │  Popular Books   │               │
-│  │  📄 8,000+      │  │  DSpace Theses   │               │
-│  │  🌐 128+        │  │  Upcoming Events │               │
+│  │  🌐 128+        │  │  🟢 Live Chat    │               │
+│  │  E-Databases    │  │  Librarian Online│               │
+│  │  📄 12,000+     │  │  [Ask Question]  │               │
+│  │  Theses (IR)    │  │  [Book Session]  │               │
+│  │  💻 45,000+     │  │                  │               │
+│  │  E-Books        │  │  Citation Tools:  │               │
+│  │  🔬 8,000+      │  │  [BibTeX] [RIS]  │               │
+│  │  Journal Arts   │  │  [Zotero]        │               │
 │  └─────────────────┘  └─────────────────┘               │
 │                                                            │
 │  ┌────────────────────────────────────────────────────┐   │
-│  │  Browse by Subject                                 │   │
-│  │  ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐        │   │
-│  │  │Civil│ │CSE │ │EEE │ │Mech│ │Arch│ │Chem│        │   │
-│  │  └────┘ └────┘ └────┘ └────┘ └────┘ └────┘        │   │
-│  └────────────────────────────────────────────────────┘   │
-│                                                            │
-│  ┌────────────────────────────────────────────────────┐   │
-│  │  E-Resources                                       │   │
-│  │  IEEE | Elsevier | JSTOR | Springer | Wiley | ACM │   │
+│  │  Newly Added to Repository                         │   │
+│  │  [Thesis 1] [Thesis 2] [Paper 3] [Paper 4]        │   │
 │  └────────────────────────────────────────────────────┘   │
 │                                                            │
 ├────────────────────────────────────────────────────────────┤
@@ -724,65 +596,120 @@ A sticky, maroon navigation bar with gold accents.
 └────────────────────────────────────────────────────────────┘
 ```
 
-### 7.2 Search Results Page
+### 7.2 E-Resource Database Page
 
 ```
 ┌────────────────────────────────────────────────────────────┐
 │  [Sticky Nav]                                              │
 ├────────────────────────────────────────────────────────────┤
 │                                                            │
-│  "machine learning" — 1,245 results                        │
+│  E-Resource Databases                                      │
 │  ┌──────────────────┐  ┌─────────────────────────────────┐│
-│  │  Filter Results  │  │  ● Available  [Physical Book]     ││
-│  │  ──────────────  │  │  Machine Learning in Engineering  ││
-│  │  Format          │  │  By Rahman, A.K.M. | 2024       ││
-│  │  ● All (1,245)   │  │  [Civil] [ML] [Structural]       ││
-│  │  ○ Physical (892)  │  │  [View] [Save] [Cite]          ││
-│  │  ○ Digital (342)   │  │                                 ││
-│  │  ○ Articles (11)     │  │  ○ Crossref  [Journal Article]  ││
-│  │  ──────────────  │  │  Deep Learning for Bridge...    ││
-│  │  Subject         │  │  Smith, J. et al. | IEEE 2023   ││
-│  │  ● All           │  │  [Open Access] [PDF]             ││
-│  │  ○ Civil (45)    │  │                                 ││
-│  │  ○ CSE (120)     │  │  ...                             ││
-│  │  ...             │  │                                 ││
-│  │  ──────────────  │  │  [1] [2] [3] ... [25] Next →    ││
-│  │  Source          │  │                                 ││
+│  │  Filter          │  │  ┌────┐ IEEE Xplore             ││
+│  │  ──────────────  │  │  │ X  │ Engineering, CS, EE   ││
+│  │  Subject         │  │  └────┘ 🟢 Subscribed          ││
+│  │  ● All (128)     │  │       [Launch Database →]     ││
+│  │  ○ Engineering(45)│  │                                 ││
+│  │  ○ CS (32)       │  │  ┌────┐ Elsevier ScienceDirect  ││
+│  │  ○ Science (28)  │  │  │ELSE│ Engineering, Applied Sci││
+│  │  ○ Humanities(15)│  │  │VIER│ 🟢 Subscribed          ││
+│  │  ──────────────  │  │  └────┘ [Launch Database →]     ││
+│  │  Type            │  │                                 ││
+│  │  ● All           │  │  ┌────┐ JSTOR Digital Library   ││
+│  │  ○ Journals (85) │  │  │JSTO│ Arts, Humanities, SS    ││
+│  │  ○ E-Books (32)  │  │  │R   │ 🟡 Open Access + Sub    ││
+│  │  ○ Standards(11) │  │  └────┘ [Launch Database →]     ││
+│  │  ──────────────  │  │                                 ││
+│  │  Access          │  │  ...                             ││
 │  │  ● All           │  │                                 ││
-│  │  ○ Koha (892)    │  │                                 ││
-│  │  ○ DSpace (342)  │  │                                 ││
-│  │  ○ Crossref (11) │  │                                 ││
+│  │  ○ Subscribed(89)│  │                                 ││
+│  │  ○ Open Access(39)│ │                                 ││
 │  └──────────────────┘  └─────────────────────────────────┘│
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+```
+
+### 7.3 Institutional Repository Page
+
+```
+┌────────────────────────────────────────────────────────────┐
+│  [Sticky Nav]                                              │
+├────────────────────────────────────────────────────────────┤
+│                                                            │
+│  BUET Institutional Repository — DSpace                    │
+│  ────────────────────────────────────────────────────────  │
+│                                                            │
+│  Browse by: [Department] [Year] [Type] [Subject]           │
+│                                                            │
+│  ┌────────────────────────────────────────────────────┐   │
+│  │  🔓 Open Access Ribbon                               │   │
+│  │  Traffic Flow Prediction in Dhaka Using Deep Learning│   │
+│  │  By Islam, N. | CSE, BUET | 2024 | M.Sc. Thesis    │   │
+│  │  📄 PDF | 🔬 Deep Learning | 🚗 Transport           │   │
+│  │  [Download PDF] [View in DSpace] [Cite]           │   │
+│  └────────────────────────────────────────────────────┘   │
+│                                                            │
+│  ┌────────────────────────────────────────────────────┐   │
+│  │  Structural Analysis of High-Rise Buildings in Dhaka │   │
+│  │  By Rahman, S. | Civil, BUET | 2023 | B.Sc. Thesis  │   │
+│  │  📄 PDF | 🏗️ Structural | 🏙️ Urban Planning        │   │
+│  │  [Download PDF] [View in DSpace] [Cite]             │   │
+│  └────────────────────────────────────────────────────┘   │
+│                                                            │
+│  [1] [2] [3] ... [25] Next →                               │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+```
+
+### 7.4 Reference Services Page
+
+```
+┌────────────────────────────────────────────────────────────┐
+│  [Sticky Nav]                                              │
+├────────────────────────────────────────────────────────────┤
+│                                                            │
+│  Reference Services                                        │
+│  ────────────────────────────────────────────────────────  │
+│                                                            │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────┐│
+│  │  🟢 Live Chat   │  │  📧 Submit      │  │  📅 Schedule││
+│  │  Librarian      │  │  a Question     │  │  Consultation││
+│  │  Online Now     │  │                 │  │             ││
+│  │  [Start Chat]   │  │  [Ask Now]      │  │  [Book]     ││
+│  └─────────────────┘  └─────────────────┘  └─────────────┘│
+│                                                            │
+│  ────────────────────────────────────────────────────────  │
+│                                                            │
+│  Citation & Research Tools                                 │
+│  ┌────────────┐ ┌────────────┐ ┌────────────┐          │
+│  │  BibTeX    │  │  RIS       │  │  Zotero    │          │
+│  │  Export    │  │  Export    │  │  Connector │          │
+│  │  [Export]  │  │  [Export]  │  │  [Install] │          │
+│  └────────────┘ └────────────┘ └────────────┘          │
+│                                                            │
+│  ────────────────────────────────────────────────────────  │
+│                                                            │
+│  Research Guides                                           │
+│  [How to Search Databases] [Writing a Literature Review]   │
+│  [Citation Styles] [Avoiding Plagiarism] [MARC Records]   │
+│                                                            │
+│  ────────────────────────────────────────────────────────  │
+│                                                            │
+│  Frequently Asked Questions                                │
+│  Q: How do I access IEEE Xplore off-campus?                │
+│  A: Use the BUET proxy at https://proxy.buet.ac.bd:8080... │
+│                                                            │
+│  Q: How do I submit my thesis to the repository?           │
+│  A: Log in to DSpace and follow the submission guide...    │
 │                                                            │
 └────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 8. Dark Mode Specification
+## 8. Dark Mode (E-Library)
 
-### Toggle
-
-A sun/moon icon toggle in the top navigation. Preference is saved to `localStorage`.
-
-```css
-.theme-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 20px;
-  padding: 8px;
-  border-radius: 50%;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-.theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--white);
-}
-```
-
-### Dark Mode Body Styles
+*(Same as V1 but with digital-blue accent for links)*
 
 ```css
 [data-theme="dark"] {
@@ -797,8 +724,8 @@ A sun/moon icon toggle in the top navigation. Preference is saved to `localStora
   --card-border: var(--paper-700);
   --nav-bg: var(--maroon-800);
   --nav-border: var(--gold-400);
-  --link-color: var(--maroon-400);
-  --link-hover: var(--maroon-300);
+  --link-color: var(--blue-400); /* Digital blue for links */
+  --link-hover: var(--blue-300);
   --accent: var(--gold-400);
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
@@ -806,354 +733,106 @@ A sun/moon icon toggle in the top navigation. Preference is saved to `localStora
 }
 ```
 
-### Dark Mode Component Overrides
-
-```css
-[data-theme="dark"] .result-card {
-  background: var(--card-bg);
-  border-color: var(--card-border);
-  color: var(--text-primary);
-}
-[data-theme="dark"] .result-card .title {
-  color: var(--maroon-300);
-}
-[data-theme="dark"] .result-card .title a:hover {
-  color: var(--maroon-200);
-}
-[data-theme="dark"] .facet-sidebar {
-  background: var(--card-bg);
-  border-color: var(--card-border);
-}
-[data-theme="dark"] .facet-group-title {
-  color: var(--text-primary);
-  border-bottom-color: var(--gold-400);
-}
-[data-theme="dark"] .hero-search {
-  background: var(--card-bg);
-  border-color: var(--card-border);
-}
-[data-theme="dark"] .hero-search input {
-  color: var(--text-primary);
-}
-[data-theme="dark"] .blueprint-grid {
-  background-color: var(--paper-900);
-  background-image: 
-    linear-gradient(rgba(139, 0, 0, 0.2) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(139, 0, 0, 0.2) 1px, transparent 1px);
-}
-```
-
 ---
 
 ## 9. Animation & Motion
 
-### 9.1 Page Transitions
-
-A subtle fade-in + slide-up for page content:
-
-```css
-.page-content {
-  animation: fadeSlideUp 0.4s ease-out;
-}
-@keyframes fadeSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-```
-
-### 9.2 Loading Skeletons
-
-For search results while federated APIs load:
-
-```css
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--paper-200) 25%,
-    var(--paper-100) 50%,
-    var(--paper-200) 75%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.5s ease-in-out infinite;
-  border-radius: 4px;
-}
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-```
-
-### 9.3 Live Status Pulse
-
-A subtle pulsing animation for the live availability indicator:
-
-```css
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
-}
-.status-pulse {
-  animation: pulse 2s ease-in-out infinite;
-}
-```
-
-### 9.4 Card Hover Lift
-
-Cards lift slightly on hover with a shadow increase:
-
-```css
-.result-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.result-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(26, 25, 22, 0.08);
-}
-[data-theme="dark"] .result-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-```
+*(Same as V1 — see `demo.html` for implementation)*
 
 ---
 
 ## 10. Accessibility (WCAG 2.1 AA)
 
-### 10.1 Color Contrast
-
-All text meets WCAG 2.1 AA contrast ratios:
+*(Same as V1 but with digital-blue link contrast checked)*
 
 | Combination | Ratio | Pass |
 |-------------|-------|------|
-| `--maroon-600` on `--white` | 7.2:1 | ✅ AA, AAA |
-| `--paper-700` on `--white` | 6.5:1 | ✅ AA |
-| `--gold-500` on `--white` | 3.1:1 | ❌ AA for body text |
-| `--gold-700` on `--white` | 5.2:1 | ✅ AA for body text |
-| `--green-700` on `--white` | 5.8:1 | ✅ AA |
-| `--white` on `--maroon-700` | 8.4:1 | ✅ AA, AAA |
-| `--text-primary` on `--paper-900` | 9.1:1 | ✅ AA, AAA |
-
-**Rule:** Gold (`--gold-500`) is NEVER used for body text. It is only used for:
-- Decorative elements (borders, accents)
-- Icons on dark backgrounds
-- Large text (headings ≥ 24px)
-
-### 10.2 Focus States
-
-All interactive elements have a visible focus state:
-
-```css
-:focus-visible {
-  outline: 2px solid var(--maroon-500);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-```
-
-### 10.3 Reduced Motion
-
-```css
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  .status-pulse {
-    animation: none;
-  }
-  .skeleton {
-    animation: none;
-    background: var(--paper-200);
-  }
-}
-```
-
-### 10.4 Screen Reader Support
-
-- Search result cards use `article` landmark with `aria-labelledby` pointing to the title
-- Live status updates use `aria-live="polite"` regions
-- Facet checkboxes have descriptive labels
-- Navigation uses proper `nav` + `ul` + `li` structure with `aria-current="page"` for active items
-- All images have `alt` text (book covers use title, decorative patterns use empty `alt`)
+| `--blue-500` on `--white` | 4.6:1 | ✅ AA |
+| `--blue-500` on `--paper-50` | 4.4:1 | ✅ AA |
+| `--blue-400` on `--paper-900` | 5.2:1 | ✅ AA |
+| `--gold-500` on `--white` | 3.1:1 | ❌ AA (decorative only) |
+| `--gold-700` on `--white` | 5.2:1 | ✅ AA (large text) |
 
 ---
 
 ## 11. Responsive Behavior
 
-### Mobile (< 640px)
-
-- Navigation collapses to hamburger menu with maroon drawer
-- Search box is full-width, button is stacked below
-- Facet sidebar becomes a collapsible bottom sheet
-- Result cards are full-width with reduced padding
-- Statistics stack vertically
-- Footer links collapse to 2-column grid
-
-### Tablet (641–1024px)
-
-- Navigation shows primary links, hamburger for secondary
-- Search box is centered, 80% width
-- Facet sidebar is a collapsible sidebar toggle
-- Result cards are full-width but with more padding
-- Statistics in 2×2 grid
-- Footer in 3-column grid
-
-### Desktop (1025–1440px)
-
-- Full navigation visible
-- Search box is 60% width, centered
-- Facet sidebar is persistent on the left (25% width)
-- Results area is 75% width
-- Statistics in 4-column row
-- Footer in 4-column grid
-
-### Wide (> 1440px)
-
-- Content maxes at 1440px, centered
-- More whitespace on margins
-- Larger touch targets (minimum 48px)
-- Statistics have more breathing room
+*(Same as V1)*
 
 ---
 
 ## 12. Assets & Files
 
-### Required Image Assets
+### Required Image Assets (E-Library)
 
 | File | Description | Location |
 |------|-------------|----------|
-| `buet-logo-white.svg` | BUET seal/logo, white variant | `themes/buet_elibrary/images/` |
-| `buet-logo-maroon.svg` | BUET seal/logo, maroon variant | `themes/buet_elibrary/images/` |
-| `jamdani-pattern.svg` | Subtle geometric border motif | `themes/buet_elibrary/images/` |
-| `campus-map.svg` | Stylized BUET campus map (footer) | `themes/buet_elibrary/images/` |
-| `book-placeholder.svg` | Placeholder for books without covers | `themes/buet_elibrary/images/` |
-| `favicon.ico` | 32×32 and 16×16 favicon | `themes/buet_elibrary/favicon.ico` |
+| `buet-logo-white.svg` | BUET seal/logo, white | `themes/buet_elibrary/images/` |
+| `buet-logo-maroon.svg` | BUET seal/logo, maroon | `themes/buet_elibrary/images/` |
+| `digital-wave.svg` | Subtle wave pattern for hero | `themes/buet_elibrary/images/` |
+| `db-icons/` | Database brand icons (IEEE, Elsevier, etc.) | `themes/buet_elibrary/images/db-icons/` |
+| `favicon.ico` | 32×32 and 16×16 | `themes/buet_elibrary/favicon.ico` |
 | `apple-touch-icon.png` | 180×180 iOS icon | `themes/buet_elibrary/images/` |
-
-### Required Font Files (or CDN)
-
-```html
-<!-- Google Fonts CDN -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif:wght@400;600;700&family=Noto+Serif+Bengali:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-```
 
 ---
 
-## 13. Drupal 11 Theme Implementation Notes
+## 13. Drupal 11 Theme Implementation
 
 ### Theme Structure
 
 ```
-themes/
-└── buet_elibrary/
-    ├── buet_elibrary.info.yml
-    ├── buet_elibrary.libraries.yml
-    ├── buet_elibrary.theme
-    ├── css/
-    │   ├── base.css           # CSS variables, resets, typography
-    │   ├── layout.css         # Grid, breakpoints, spacing
-    │   ├── components.css     # Buttons, cards, forms, badges
-    │   ├── navigation.css     # Nav, sidebar, breadcrumbs
-    │   ├── search.css         # Search box, results, facets
-    │   ├── dark-mode.css      # Dark mode overrides
-    │   └── print.css          # Print styles
-    ├── js/
-    │   ├── dark-mode.js       # Theme toggle, localStorage
-    │   ├── live-status.js     # AJAX status loading
-    │   └── federated-search.js # Client-side meta-search
-    ├── images/
-    │   ├── buet-logo-white.svg
-    │   ├── buet-logo-maroon.svg
-    │   ├── jamdani-pattern.svg
-    │   └── campus-map.svg
-    └── templates/
-        ├── page.html.twig
-        ├── region.html.twig
-        ├── block.html.twig
-        ├── node.html.twig
-        ├── search-result.html.twig
-        ├── search-results.html.twig
-        └── facet-*.html.twig
-```
-
-### Key Drupal Modules to Style
-
-- `search_api` — Search results, facets, search pages
-- `search_api_elasticsearch` — Elasticsearch integration
-- `facets` — Faceted navigation blocks
-- `views` — Custom views for database listings, new arrivals
-- `better_exposed_filters` — Enhanced filter UI
-- `twig_tweak` — Utility functions for custom templates
-
-### CSS Custom Properties (CSS Variables)
-
-All colors, spacing, typography, and breakpoints are defined as CSS custom properties in `base.css`. This allows dynamic dark mode switching and easy theming without recompiling.
-
-```css
-:root {
-  /* Colors */
-  --maroon-50: #FDF2F2;
-  --maroon-100: #FADCDC;
-  /* ... full palette ... */
-  
-  /* Typography */
-  --font-primary: "Noto Serif Bengali", "Noto Serif", "Georgia", serif;
-  --font-secondary: "Inter", "Noto Sans Bengali", "Helvetica Neue", sans-serif;
-  --font-mono: "JetBrains Mono", "Fira Code", "Courier New", monospace;
-  
-  /* Spacing */
-  --space-1: 4px;
-  --space-2: 8px;
-  /* ... full scale ... */
-  
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(26, 25, 22, 0.04);
-  --shadow-md: 0 4px 8px rgba(26, 25, 22, 0.08);
-  --shadow-lg: 0 8px 16px rgba(26, 25, 22, 0.12);
-}
+themes/buet_elibrary/
+├── buet_elibrary.info.yml
+├── buet_elibrary.libraries.yml
+├── buet_elibrary.theme
+├── css/
+│   ├── base.css           # ← Import this file (from design/)
+│   ├── layout.css
+│   ├── components.css     # Cards, badges, buttons, forms
+│   ├── navigation.css     # Nav, sidebar, breadcrumbs
+│   ├── e-resources.css    # Database cards, e-resource browser
+│   ├── repository.css     # DSpace item cards, browse pages
+│   ├── reference.css      # Reference widget, helpdesk, guides
+│   ├── search.css         # Search box, results, facets
+│   ├── dark-mode.css      # Dark mode overrides
+│   └── print.css
+├── js/
+│   ├── dark-mode.js
+│   ├── live-status.js     # Real-time availability (for proxy)
+│   ├── federated-search.js
+│   └── reference-chat.js  # Live chat widget
+├── images/
+│   ├── buet-logo-white.svg
+│   ├── buet-logo-maroon.svg
+│   ├── digital-wave.svg
+│   └── db-icons/
+│       ├── ieee.svg
+│       ├── elsevier.svg
+│       ├── jstor.svg
+│       ├── springer.svg
+│       ├── wiley.svg
+│       └── acm.svg
+└── templates/
+    ├── page.html.twig
+    ├── node--e-resource.html.twig
+    ├── node--repository-item.html.twig
+    ├── search-result.html.twig
+    ├── search-results.html.twig
+    ├── facet-*.html.twig
+    └── block--reference-widget.html.twig
 ```
 
 ---
 
-## 14. Design Inspiration References
-
-The design draws from multiple sources of inspiration:
+## 14. Design Inspiration
 
 1. **BUET Institutional Identity** — Maroon and gold from the official seal
-2. **Bangladeshi Heritage** — Jamdani weaving patterns, terracotta architecture, natural materials
-3. **Engineering Modernism** — Grid systems, blueprint aesthetics, technical precision
-4. **Contemporary Library Design** — NYPL Digital, Digital Public Library of America, Europeana
-5. **Material Design 3** — Dynamic color, elevation, motion
-6. **Tailwind CSS Philosophy** — Utility-first, constraint-based design
+2. **Digital-First Libraries** — MIT Libraries, Stanford Digital Repository, arXiv
+3. **E-Resource Portals** — IEEE Xplore, ScienceDirect, JSTOR interface patterns
+4. **Open Access Movement** — DOAJ, CORE, Unpaywall visual language
+5. **Bangladeshi Digital Design** — bKash app, Pathao, local SaaS aesthetics
+6. **Engineering Precision** — Grid systems, data density, technical clarity
 
 ---
 
-## 15. Appendix: Color Accessibility Matrix
-
-| Color | On White | On Paper-50 | On Maroon-700 | On Dark |
-|-------|----------|-------------|---------------|---------|
-| Maroon-600 | ✅ 7.2:1 | ✅ 6.8:1 | ❌ 1.8:1 | ✅ 5.4:1 |
-| Gold-500 | ❌ 3.1:1 | ❌ 2.9:1 | ✅ 4.5:1 | ✅ 5.1:1 |
-| Gold-700 | ✅ 5.2:1 | ✅ 4.9:1 | ✅ 7.1:1 | ✅ 8.2:1 |
-| Green-500 | ✅ 4.5:1 | ✅ 4.2:1 | ❌ 2.1:1 | ✅ 4.8:1 |
-| Green-700 | ✅ 5.8:1 | ✅ 5.5:1 | ✅ 6.2:1 | ✅ 7.5:1 |
-| Paper-700 | ✅ 6.5:1 | ✅ 6.1:1 | ❌ 2.4:1 | ✅ 6.8:1 |
-| Paper-800 | ✅ 8.1:1 | ✅ 7.6:1 | ❌ 3.0:1 | ✅ 8.4:1 |
-| White | ❌ 1.0:1 | ❌ 1.1:1 | ✅ 8.4:1 | ❌ 1.0:1 |
-| Text-Primary | N/A | N/A | N/A | ✅ 9.1:1 |
-
-*Legend: ✅ = WCAG 2.1 AA compliant (4.5:1 for body, 3:1 for large text), ❌ = not compliant*
-
----
-
-**End of Design System**
+**End of E-Library Design System**

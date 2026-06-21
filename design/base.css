@@ -41,6 +41,18 @@
   --green-800: #14532D;
   --green-900: #052E16;
 
+  /* ── Digital Blue (Links & Open Access) ──────────────────────────── */
+  --blue-50: #EFF6FF;
+  --blue-100: #DBEAFE;
+  --blue-200: #BFDBFE;
+  --blue-300: #93C5FD;
+  --blue-400: #60A5FA;
+  --blue-500: #3B82F6;
+  --blue-600: #2563EB;
+  --blue-700: #1D4ED8;
+  --blue-800: #1E40AF;
+  --blue-900: #1E3A8A;
+
   /* ── Neutral: Concrete & Paper ─────────────────────────────────── */
   --white: #FFFFFF;
   --paper-50: #FDFCFA;
@@ -134,8 +146,8 @@
   --card-border: var(--paper-700);
   --nav-bg: var(--maroon-800);
   --nav-border: var(--gold-400);
-  --link-color: var(--maroon-400);
-  --link-hover: var(--maroon-300);
+  --link-color: var(--blue-400);
+  --link-hover: var(--blue-300);
   --accent: var(--gold-400);
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
@@ -157,8 +169,8 @@
   --card-border: var(--paper-200);
   --nav-bg: var(--maroon-700);
   --nav-border: var(--gold-500);
-  --link-color: var(--maroon-600);
-  --link-hover: var(--maroon-500);
+  --link-color: var(--blue-600);
+  --link-hover: var(--blue-500);
   --accent: var(--gold-500);
 }
 
@@ -175,7 +187,7 @@
   --card-border: var(--paper-200);
   --nav-bg: var(--maroon-700);
   --nav-border: var(--gold-500);
-  --link-color: var(--maroon-600);
-  --link-hover: var(--maroon-500);
+  --link-color: var(--blue-600);
+  --link-hover: var(--blue-500);
   --accent: var(--gold-500);
 }
